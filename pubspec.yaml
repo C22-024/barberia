@@ -1,0 +1,28 @@
+name: barberia
+description: A barbershop booking app.
+
+publish_to: 'none'
+
+version: 0.1.0+1
+
+environment:
+  sdk: '>=2.18.4 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  barberia_ui:
+    git:
+      url: https://github.com/kevinkwee/barberia_ui.git
+      ref: main
+  go_router: ^5.1.7
+  get_it: ^7.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
