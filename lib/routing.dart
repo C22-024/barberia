@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:barberia/features/activities/presentation/activities_page.dart';
+
 import 'common_widgets/placeholder_page.dart';
 import 'common_widgets/scaffold_with_navbar.dart';
 import 'features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
@@ -71,7 +73,7 @@ final router = GoRouter(
         GoRoute(
           name: 'activities',
           path: '/activities',
-          builder: (context, state) => const PlaceholderPage('Activities'),
+          builder: (context, state) => const ActivitiesPage(),
         ),
         GoRoute(
           name: 'profile',
