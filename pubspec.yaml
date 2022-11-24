@@ -19,11 +19,19 @@ dependencies:
   go_router: ^5.1.7
   get_it: ^7.2.0
   firebase_core: ^2.2.0
+  firebase_auth: ^4.1.2
+  freezed_annotation: ^2.2.0
+  json_annotation: ^4.7.0
+  geoflutterfire2: ^2.3.14
+  fpdart: ^0.3.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  build_runner: ^2.3.2
+  freezed: ^2.2.1
+  json_serializable: ^6.5.4
 
 flutter:
   uses-material-design: true
