@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import 'common_widgets/placeholder_page.dart';
 import 'features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
+import 'features/auth/presentation/pages/splash_page.dart';
 import 'features/auth/presentation/pages/welcome_page.dart';
 import 'injection.dart';
 
@@ -14,13 +15,19 @@ final _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shellNav');
 final router = GoRouter(
   navigatorKey: _rootNavigatorKey,
   routes: [
+    GoRoute(
+      path: '/',
+      pageBuilder: (context, state) => const NoTransitionPage(
+        child: SplashPage(),
+      ),
+    ),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
       builder: (context, state, child) => const PlaceholderPage('Home Page'),
       routes: [
         GoRoute(
           name: 'home',
-          path: '/',
+          path: '/home',
           builder: (context, state) => const PlaceholderPage('Home'),
         ),
       ],
@@ -52,18 +59,40 @@ final router = GoRouter(
       ],
     ),
   ],
-  redirect: (_, state) {
-    return getIt<AuthBloc>().state.when(
-          authenticated: (_) {
+  redirect: (_, state) async {
+    return await getIt<AuthBloc>().state.when(
+          authenticated: (_) async {
+            // from welcome page
             if (state.subloc.startsWith('/welcome')) {
-              return '/';
+              return '/home';
             }
+
+            // from splash screen
+            if (state.subloc == '/') {
+              return await Future.delayed(
+                const Duration(seconds: 2),
+                () => '/home',
+              );
+            }
+
+            // no redirect
             return null;
           },
-          unauthenticated: () {
+          unauthenticated: () async {
+            // from splash screen
+            if (state.subloc == '/') {
+              return await Future.delayed(
+                const Duration(seconds: 2),
+                () => '/welcome',
+              );
+            }
+
+            // neither in splash nor welcome
             if (!state.subloc.startsWith('/welcome')) {
               return '/welcome';
             }
+
+            // no redirect
             return null;
           },
           initial: () => null,
