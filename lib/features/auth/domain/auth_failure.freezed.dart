@@ -23,7 +23,7 @@ mixin _$AuthFailure {
     required TResult Function() invalidEmailOrPassword,
     required TResult Function() invalidEmail,
     required TResult Function() timeout,
-    required TResult Function() unexpected,
+    required TResult Function(String message) unexpected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -33,7 +33,7 @@ mixin _$AuthFailure {
     TResult? Function()? invalidEmailOrPassword,
     TResult? Function()? invalidEmail,
     TResult? Function()? timeout,
-    TResult? Function()? unexpected,
+    TResult? Function(String message)? unexpected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,7 +43,7 @@ mixin _$AuthFailure {
     TResult Function()? invalidEmailOrPassword,
     TResult Function()? invalidEmail,
     TResult Function()? timeout,
-    TResult Function()? unexpected,
+    TResult Function(String message)? unexpected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -142,7 +142,7 @@ class _$_EmailAlreadyInUse implements _EmailAlreadyInUse {
     required TResult Function() invalidEmailOrPassword,
     required TResult Function() invalidEmail,
     required TResult Function() timeout,
-    required TResult Function() unexpected,
+    required TResult Function(String message) unexpected,
   }) {
     return emailAlreadyInUse();
   }
@@ -155,7 +155,7 @@ class _$_EmailAlreadyInUse implements _EmailAlreadyInUse {
     TResult? Function()? invalidEmailOrPassword,
     TResult? Function()? invalidEmail,
     TResult? Function()? timeout,
-    TResult? Function()? unexpected,
+    TResult? Function(String message)? unexpected,
   }) {
     return emailAlreadyInUse?.call();
   }
@@ -168,7 +168,7 @@ class _$_EmailAlreadyInUse implements _EmailAlreadyInUse {
     TResult Function()? invalidEmailOrPassword,
     TResult Function()? invalidEmail,
     TResult Function()? timeout,
-    TResult Function()? unexpected,
+    TResult Function(String message)? unexpected,
     required TResult orElse(),
   }) {
     if (emailAlreadyInUse != null) {
@@ -269,7 +269,7 @@ class _$_WeakPassword implements _WeakPassword {
     required TResult Function() invalidEmailOrPassword,
     required TResult Function() invalidEmail,
     required TResult Function() timeout,
-    required TResult Function() unexpected,
+    required TResult Function(String message) unexpected,
   }) {
     return weakPassword();
   }
@@ -282,7 +282,7 @@ class _$_WeakPassword implements _WeakPassword {
     TResult? Function()? invalidEmailOrPassword,
     TResult? Function()? invalidEmail,
     TResult? Function()? timeout,
-    TResult? Function()? unexpected,
+    TResult? Function(String message)? unexpected,
   }) {
     return weakPassword?.call();
   }
@@ -295,7 +295,7 @@ class _$_WeakPassword implements _WeakPassword {
     TResult Function()? invalidEmailOrPassword,
     TResult Function()? invalidEmail,
     TResult Function()? timeout,
-    TResult Function()? unexpected,
+    TResult Function(String message)? unexpected,
     required TResult orElse(),
   }) {
     if (weakPassword != null) {
@@ -397,7 +397,7 @@ class _$_InvalidEmailOrPassword implements _InvalidEmailOrPassword {
     required TResult Function() invalidEmailOrPassword,
     required TResult Function() invalidEmail,
     required TResult Function() timeout,
-    required TResult Function() unexpected,
+    required TResult Function(String message) unexpected,
   }) {
     return invalidEmailOrPassword();
   }
@@ -410,7 +410,7 @@ class _$_InvalidEmailOrPassword implements _InvalidEmailOrPassword {
     TResult? Function()? invalidEmailOrPassword,
     TResult? Function()? invalidEmail,
     TResult? Function()? timeout,
-    TResult? Function()? unexpected,
+    TResult? Function(String message)? unexpected,
   }) {
     return invalidEmailOrPassword?.call();
   }
@@ -423,7 +423,7 @@ class _$_InvalidEmailOrPassword implements _InvalidEmailOrPassword {
     TResult Function()? invalidEmailOrPassword,
     TResult Function()? invalidEmail,
     TResult Function()? timeout,
-    TResult Function()? unexpected,
+    TResult Function(String message)? unexpected,
     required TResult orElse(),
   }) {
     if (invalidEmailOrPassword != null) {
@@ -524,7 +524,7 @@ class _$_InvalidEmail implements _InvalidEmail {
     required TResult Function() invalidEmailOrPassword,
     required TResult Function() invalidEmail,
     required TResult Function() timeout,
-    required TResult Function() unexpected,
+    required TResult Function(String message) unexpected,
   }) {
     return invalidEmail();
   }
@@ -537,7 +537,7 @@ class _$_InvalidEmail implements _InvalidEmail {
     TResult? Function()? invalidEmailOrPassword,
     TResult? Function()? invalidEmail,
     TResult? Function()? timeout,
-    TResult? Function()? unexpected,
+    TResult? Function(String message)? unexpected,
   }) {
     return invalidEmail?.call();
   }
@@ -550,7 +550,7 @@ class _$_InvalidEmail implements _InvalidEmail {
     TResult Function()? invalidEmailOrPassword,
     TResult Function()? invalidEmail,
     TResult Function()? timeout,
-    TResult Function()? unexpected,
+    TResult Function(String message)? unexpected,
     required TResult orElse(),
   }) {
     if (invalidEmail != null) {
@@ -650,7 +650,7 @@ class _$_Timeout implements _Timeout {
     required TResult Function() invalidEmailOrPassword,
     required TResult Function() invalidEmail,
     required TResult Function() timeout,
-    required TResult Function() unexpected,
+    required TResult Function(String message) unexpected,
   }) {
     return timeout();
   }
@@ -663,7 +663,7 @@ class _$_Timeout implements _Timeout {
     TResult? Function()? invalidEmailOrPassword,
     TResult? Function()? invalidEmail,
     TResult? Function()? timeout,
-    TResult? Function()? unexpected,
+    TResult? Function(String message)? unexpected,
   }) {
     return timeout?.call();
   }
@@ -676,7 +676,7 @@ class _$_Timeout implements _Timeout {
     TResult Function()? invalidEmailOrPassword,
     TResult Function()? invalidEmail,
     TResult Function()? timeout,
-    TResult Function()? unexpected,
+    TResult Function(String message)? unexpected,
     required TResult orElse(),
   }) {
     if (timeout != null) {
@@ -739,6 +739,8 @@ abstract class _$$_UnexpectedCopyWith<$Res> {
   factory _$$_UnexpectedCopyWith(
           _$_Unexpected value, $Res Function(_$_Unexpected) then) =
       __$$_UnexpectedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
 }
 
 /// @nodoc
@@ -748,26 +750,50 @@ class __$$_UnexpectedCopyWithImpl<$Res>
   __$$_UnexpectedCopyWithImpl(
       _$_Unexpected _value, $Res Function(_$_Unexpected) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$_Unexpected(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Unexpected implements _Unexpected {
-  const _$_Unexpected();
+  const _$_Unexpected(this.message);
+
+  @override
+  final String message;
 
   @override
   String toString() {
-    return 'AuthFailure.unexpected()';
+    return 'AuthFailure.unexpected(message: $message)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Unexpected);
+        (other.runtimeType == runtimeType &&
+            other is _$_Unexpected &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UnexpectedCopyWith<_$_Unexpected> get copyWith =>
+      __$$_UnexpectedCopyWithImpl<_$_Unexpected>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -777,9 +803,9 @@ class _$_Unexpected implements _Unexpected {
     required TResult Function() invalidEmailOrPassword,
     required TResult Function() invalidEmail,
     required TResult Function() timeout,
-    required TResult Function() unexpected,
+    required TResult Function(String message) unexpected,
   }) {
-    return unexpected();
+    return unexpected(message);
   }
 
   @override
@@ -790,9 +816,9 @@ class _$_Unexpected implements _Unexpected {
     TResult? Function()? invalidEmailOrPassword,
     TResult? Function()? invalidEmail,
     TResult? Function()? timeout,
-    TResult? Function()? unexpected,
+    TResult? Function(String message)? unexpected,
   }) {
-    return unexpected?.call();
+    return unexpected?.call(message);
   }
 
   @override
@@ -803,11 +829,11 @@ class _$_Unexpected implements _Unexpected {
     TResult Function()? invalidEmailOrPassword,
     TResult Function()? invalidEmail,
     TResult Function()? timeout,
-    TResult Function()? unexpected,
+    TResult Function(String message)? unexpected,
     required TResult orElse(),
   }) {
     if (unexpected != null) {
-      return unexpected();
+      return unexpected(message);
     }
     return orElse();
   }
@@ -858,5 +884,10 @@ class _$_Unexpected implements _Unexpected {
 }
 
 abstract class _Unexpected implements AuthFailure {
-  const factory _Unexpected() = _$_Unexpected;
+  const factory _Unexpected(final String message) = _$_Unexpected;
+
+  String get message;
+  @JsonKey(ignore: true)
+  _$$_UnexpectedCopyWith<_$_Unexpected> get copyWith =>
+      throw _privateConstructorUsedError;
 }

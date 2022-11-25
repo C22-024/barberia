@@ -24,6 +24,7 @@ dependencies:
   json_annotation: ^4.7.0
   geoflutterfire2: ^2.3.14
   fpdart: ^0.3.0
+  cloud_firestore: ^4.1.0
 
 dev_dependencies:
   flutter_test:
