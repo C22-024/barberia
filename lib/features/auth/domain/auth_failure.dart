@@ -9,5 +9,5 @@ class AuthFailure with _$AuthFailure {
   const factory AuthFailure.invalidEmailOrPassword() = _InvalidEmailOrPassword;
   const factory AuthFailure.invalidEmail() = _InvalidEmail;
   const factory AuthFailure.timeout() = _Timeout;
-  const factory AuthFailure.unexpected() = _Unexpected;
+  const factory AuthFailure.unexpected(String message) = _Unexpected;
 }
