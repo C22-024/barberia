@@ -9,6 +9,7 @@ class PlaceholderPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: BAppBar(),
       body: Center(
         child: BText.body('$title page'),
       ),
