@@ -99,9 +99,7 @@ class _ButtonSection extends StatelessWidget {
           tag: 'button0',
           child: BButton(
             label: 'Buat Akun Baru',
-            onPressed: () {
-              context.pushNamed('signup');
-            },
+            onPressed: () => context.pushNamed('signup'),
           ),
         ),
         verticalSpace8,
