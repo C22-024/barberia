@@ -1,11 +1,12 @@
 import 'dart:async';
 
-import 'package:barberia/features/auth/presentation/pages/signin_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 import 'common_widgets/placeholder_page.dart';
 import 'features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
+import 'features/auth/presentation/pages/signin_page.dart';
+import 'features/auth/presentation/pages/signup_page.dart';
 import 'features/auth/presentation/pages/splash_page.dart';
 import 'features/auth/presentation/pages/welcome_page.dart';
 import 'injection.dart';
@@ -55,7 +56,7 @@ final router = GoRouter(
         GoRoute(
           name: 'signup',
           path: 'signup',
-          builder: (context, state) => const PlaceholderPage('Sign Up'),
+          builder: (context, state) => const SignUpPage(),
         ),
       ],
     ),
