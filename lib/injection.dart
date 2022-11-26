@@ -5,7 +5,9 @@ import 'features/auth/data/repositories/auth_facade_impl.dart';
 import 'features/auth/domain/repositories/auth_facade.dart';
 import 'features/auth/domain/usecase/get_signed_in_user.dart';
 import 'features/auth/domain/usecase/sign_out.dart';
+import 'features/auth/domain/usecase/signin_with_email_and_password.dart';
 import 'features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
+import 'features/auth/presentation/bloc/signin_form_bloc/signin_form_bloc.dart';
 
 final getIt = GetIt.instance;
 
@@ -15,10 +17,12 @@ void init() {
         getSignedInUser: getIt(),
         signOut: getIt(),
       ));
+  getIt.registerFactory(() => SignInFormBloc(getIt()));
 
   // usecase
   getIt.registerLazySingleton<GetSignedInUser>(() => GetSignedInUser(getIt()));
   getIt.registerLazySingleton<SignOut>(() => SignOut(getIt()));
+  getIt.registerLazySingleton(() => SigninWithEmailAndPassword(getIt()));
 
   // repository
   getIt.registerLazySingleton<AuthFacade>(() => AuthFacadeImpl(getIt()));

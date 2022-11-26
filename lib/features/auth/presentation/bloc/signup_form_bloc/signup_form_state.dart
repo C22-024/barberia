@@ -1,8 +1,8 @@
 part of 'signup_form_bloc.dart';
 
 @freezed
-class SignupFormState with _$SignupFormState {
-  const factory SignupFormState({
+class SignUpFormState with _$SignUpFormState {
+  const factory SignUpFormState({
     required Either<String, String> email,
     required Either<String, String> password,
     required bool isSubmitting,
@@ -10,7 +10,7 @@ class SignupFormState with _$SignupFormState {
     required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
   }) = _SignupFormState;
 
-  factory SignupFormState.initial() => SignupFormState(
+  factory SignUpFormState.initial() => SignUpFormState(
         email: left(''),
         password: left(''),
         isSubmitting: false,

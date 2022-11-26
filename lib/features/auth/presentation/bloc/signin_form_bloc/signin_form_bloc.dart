@@ -10,13 +10,13 @@ part 'signin_form_bloc.freezed.dart';
 part 'signin_form_event.dart';
 part 'signin_form_state.dart';
 
-class SigninFormBloc extends Bloc<SigninFormEvent, SigninFormState> {
+class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
   final SigninWithEmailAndPassword signinWithEmailAndPassword;
 
-  SigninFormBloc(this.signinWithEmailAndPassword)
-      : super(SigninFormState.initial()) {
-    on<SigninFormEvent>((event, emit) {
-      event.when(
+  SignInFormBloc(this.signinWithEmailAndPassword)
+      : super(SignInFormState.initial()) {
+    on<SignInFormEvent>((event, emit) async {
+      await event.when(
         emailChanged: (email) => _handleEmailChanged(emit, email),
         passwordChanged: (password) => _handlePasswordChanged(emit, password),
         signInButtonPressed: () => _handleSignInButtonPressed(emit),
@@ -24,21 +24,23 @@ class SigninFormBloc extends Bloc<SigninFormEvent, SigninFormState> {
     });
   }
 
-  void _handleEmailChanged(Emitter<SigninFormState> emit, String email) {
+  Future<void> _handleEmailChanged(
+      Emitter<SignInFormState> emit, String email) async {
     emit(state.copyWith(
       email: validateEmailAddress(email),
       authFailureOrSuccessOption: none(),
     ));
   }
 
-  void _handlePasswordChanged(Emitter<SigninFormState> emit, String password) {
+  Future<void> _handlePasswordChanged(
+      Emitter<SignInFormState> emit, String password) async {
     emit(state.copyWith(
-      email: validatePassword(password, 8),
+      password: validatePassword(password, 8),
       authFailureOrSuccessOption: none(),
     ));
   }
 
-  Future<void> _handleSignInButtonPressed(Emitter<SigninFormState> emit) async {
+  Future<void> _handleSignInButtonPressed(Emitter<SignInFormState> emit) async {
     final isEmailValid = state.email.isRight();
     final isPasswordValid = state.password.isRight();
     Either<AuthFailure, Unit>? failureOrSuccess;
@@ -56,12 +58,12 @@ class SigninFormBloc extends Bloc<SigninFormEvent, SigninFormState> {
         email: email,
         password: password,
       );
-
-      emit(state.copyWith(
-        isSubmitting: false,
-        errorMessagesShown: true,
-        authFailureOrSuccessOption: optionOf(failureOrSuccess),
-      ));
     }
+
+    emit(state.copyWith(
+      isSubmitting: false,
+      errorMessagesShown: true,
+      authFailureOrSuccessOption: optionOf(failureOrSuccess),
+    ));
   }
 }

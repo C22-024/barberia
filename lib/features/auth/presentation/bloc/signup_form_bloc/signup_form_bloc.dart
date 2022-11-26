@@ -10,12 +10,12 @@ part 'signup_form_bloc.freezed.dart';
 part 'signup_form_event.dart';
 part 'signup_form_state.dart';
 
-class SignupFormBloc extends Bloc<SignupFormEvent, SignupFormState> {
+class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
   final CreateUserWithEmailAndPassword createUserWithEmailAndPassword;
 
-  SignupFormBloc(this.createUserWithEmailAndPassword)
-      : super(SignupFormState.initial()) {
-    on<SignupFormEvent>((event, emit) async {
+  SignUpFormBloc(this.createUserWithEmailAndPassword)
+      : super(SignUpFormState.initial()) {
+    on<SignUpFormEvent>((event, emit) async {
       event.when(
         emailChanged: (email) => _handleEmailChanged(emit, email),
         passwordChanged: (password) => _handlePasswordChanged(emit, password),
@@ -24,21 +24,21 @@ class SignupFormBloc extends Bloc<SignupFormEvent, SignupFormState> {
     });
   }
 
-  void _handleEmailChanged(Emitter<SignupFormState> emit, String email) {
+  void _handleEmailChanged(Emitter<SignUpFormState> emit, String email) {
     emit(state.copyWith(
       email: validateEmailAddress(email),
       authFailureOrSuccessOption: none(),
     ));
   }
 
-  void _handlePasswordChanged(Emitter<SignupFormState> emit, String password) {
+  void _handlePasswordChanged(Emitter<SignUpFormState> emit, String password) {
     emit(state.copyWith(
       email: validatePassword(password, 8),
       authFailureOrSuccessOption: none(),
     ));
   }
 
-  Future<void> _handleSignUpButtonPressed(Emitter<SignupFormState> emit) async {
+  Future<void> _handleSignUpButtonPressed(Emitter<SignUpFormState> emit) async {
     final isEmailValid = state.email.isRight();
     final isPasswordValid = state.password.isRight();
     Either<AuthFailure, Unit>? failureOrSuccess;
