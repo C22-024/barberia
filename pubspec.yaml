@@ -27,6 +27,7 @@ dependencies:
   cloud_firestore: ^4.1.0
   flutter_bloc: ^8.1.1
   provider: ^6.0.4
+  another_flushbar: ^1.12.29
 
 dev_dependencies:
   flutter_test:

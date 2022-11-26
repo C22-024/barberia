@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$SigninFormEvent {
+mixin _$SignInFormEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String email) emailChanged,
@@ -63,16 +63,16 @@ mixin _$SigninFormEvent {
 }
 
 /// @nodoc
-abstract class $SigninFormEventCopyWith<$Res> {
-  factory $SigninFormEventCopyWith(
-          SigninFormEvent value, $Res Function(SigninFormEvent) then) =
-      _$SigninFormEventCopyWithImpl<$Res, SigninFormEvent>;
+abstract class $SignInFormEventCopyWith<$Res> {
+  factory $SignInFormEventCopyWith(
+          SignInFormEvent value, $Res Function(SignInFormEvent) then) =
+      _$SignInFormEventCopyWithImpl<$Res, SignInFormEvent>;
 }
 
 /// @nodoc
-class _$SigninFormEventCopyWithImpl<$Res, $Val extends SigninFormEvent>
-    implements $SigninFormEventCopyWith<$Res> {
-  _$SigninFormEventCopyWithImpl(this._value, this._then);
+class _$SignInFormEventCopyWithImpl<$Res, $Val extends SignInFormEvent>
+    implements $SignInFormEventCopyWith<$Res> {
+  _$SignInFormEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -91,7 +91,7 @@ abstract class _$$_EmailChangedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_EmailChangedCopyWithImpl<$Res>
-    extends _$SigninFormEventCopyWithImpl<$Res, _$_EmailChanged>
+    extends _$SignInFormEventCopyWithImpl<$Res, _$_EmailChanged>
     implements _$$_EmailChangedCopyWith<$Res> {
   __$$_EmailChangedCopyWithImpl(
       _$_EmailChanged _value, $Res Function(_$_EmailChanged) _then)
@@ -121,7 +121,7 @@ class _$_EmailChanged implements _EmailChanged {
 
   @override
   String toString() {
-    return 'SigninFormEvent.emailChanged(email: $email)';
+    return 'SignInFormEvent.emailChanged(email: $email)';
   }
 
   @override
@@ -210,7 +210,7 @@ class _$_EmailChanged implements _EmailChanged {
   }
 }
 
-abstract class _EmailChanged implements SigninFormEvent {
+abstract class _EmailChanged implements SignInFormEvent {
   const factory _EmailChanged(final String email) = _$_EmailChanged;
 
   String get email;
@@ -230,7 +230,7 @@ abstract class _$$_PasswordChangedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_PasswordChangedCopyWithImpl<$Res>
-    extends _$SigninFormEventCopyWithImpl<$Res, _$_PasswordChanged>
+    extends _$SignInFormEventCopyWithImpl<$Res, _$_PasswordChanged>
     implements _$$_PasswordChangedCopyWith<$Res> {
   __$$_PasswordChangedCopyWithImpl(
       _$_PasswordChanged _value, $Res Function(_$_PasswordChanged) _then)
@@ -260,7 +260,7 @@ class _$_PasswordChanged implements _PasswordChanged {
 
   @override
   String toString() {
-    return 'SigninFormEvent.passwordChanged(password: $password)';
+    return 'SignInFormEvent.passwordChanged(password: $password)';
   }
 
   @override
@@ -350,7 +350,7 @@ class _$_PasswordChanged implements _PasswordChanged {
   }
 }
 
-abstract class _PasswordChanged implements SigninFormEvent {
+abstract class _PasswordChanged implements SignInFormEvent {
   const factory _PasswordChanged(final String password) = _$_PasswordChanged;
 
   String get password;
@@ -368,7 +368,7 @@ abstract class _$$_SignInButtonPressedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_SignInButtonPressedCopyWithImpl<$Res>
-    extends _$SigninFormEventCopyWithImpl<$Res, _$_SignInButtonPressed>
+    extends _$SignInFormEventCopyWithImpl<$Res, _$_SignInButtonPressed>
     implements _$$_SignInButtonPressedCopyWith<$Res> {
   __$$_SignInButtonPressedCopyWithImpl(_$_SignInButtonPressed _value,
       $Res Function(_$_SignInButtonPressed) _then)
@@ -382,7 +382,7 @@ class _$_SignInButtonPressed implements _SignInButtonPressed {
 
   @override
   String toString() {
-    return 'SigninFormEvent.signInButtonPressed()';
+    return 'SignInFormEvent.signInButtonPressed()';
   }
 
   @override
@@ -463,12 +463,12 @@ class _$_SignInButtonPressed implements _SignInButtonPressed {
   }
 }
 
-abstract class _SignInButtonPressed implements SigninFormEvent {
+abstract class _SignInButtonPressed implements SignInFormEvent {
   const factory _SignInButtonPressed() = _$_SignInButtonPressed;
 }
 
 /// @nodoc
-mixin _$SigninFormState {
+mixin _$SignInFormState {
   Either<String, String> get email => throw _privateConstructorUsedError;
   Either<String, String> get password => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
@@ -477,15 +477,15 @@ mixin _$SigninFormState {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $SigninFormStateCopyWith<SigninFormState> get copyWith =>
+  $SignInFormStateCopyWith<SignInFormState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SigninFormStateCopyWith<$Res> {
-  factory $SigninFormStateCopyWith(
-          SigninFormState value, $Res Function(SigninFormState) then) =
-      _$SigninFormStateCopyWithImpl<$Res, SigninFormState>;
+abstract class $SignInFormStateCopyWith<$Res> {
+  factory $SignInFormStateCopyWith(
+          SignInFormState value, $Res Function(SignInFormState) then) =
+      _$SignInFormStateCopyWithImpl<$Res, SignInFormState>;
   @useResult
   $Res call(
       {Either<String, String> email,
@@ -496,9 +496,9 @@ abstract class $SigninFormStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SigninFormStateCopyWithImpl<$Res, $Val extends SigninFormState>
-    implements $SigninFormStateCopyWith<$Res> {
-  _$SigninFormStateCopyWithImpl(this._value, this._then);
+class _$SignInFormStateCopyWithImpl<$Res, $Val extends SignInFormState>
+    implements $SignInFormStateCopyWith<$Res> {
+  _$SignInFormStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -541,7 +541,7 @@ class _$SigninFormStateCopyWithImpl<$Res, $Val extends SigninFormState>
 
 /// @nodoc
 abstract class _$$_SigninFormStateCopyWith<$Res>
-    implements $SigninFormStateCopyWith<$Res> {
+    implements $SignInFormStateCopyWith<$Res> {
   factory _$$_SigninFormStateCopyWith(
           _$_SigninFormState value, $Res Function(_$_SigninFormState) then) =
       __$$_SigninFormStateCopyWithImpl<$Res>;
@@ -557,7 +557,7 @@ abstract class _$$_SigninFormStateCopyWith<$Res>
 
 /// @nodoc
 class __$$_SigninFormStateCopyWithImpl<$Res>
-    extends _$SigninFormStateCopyWithImpl<$Res, _$_SigninFormState>
+    extends _$SignInFormStateCopyWithImpl<$Res, _$_SigninFormState>
     implements _$$_SigninFormStateCopyWith<$Res> {
   __$$_SigninFormStateCopyWithImpl(
       _$_SigninFormState _value, $Res Function(_$_SigninFormState) _then)
@@ -620,7 +620,7 @@ class _$_SigninFormState implements _SigninFormState {
 
   @override
   String toString() {
-    return 'SigninFormState(email: $email, password: $password, isSubmitting: $isSubmitting, errorMessagesShown: $errorMessagesShown, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'SignInFormState(email: $email, password: $password, isSubmitting: $isSubmitting, errorMessagesShown: $errorMessagesShown, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
@@ -652,7 +652,7 @@ class _$_SigninFormState implements _SigninFormState {
       __$$_SigninFormStateCopyWithImpl<_$_SigninFormState>(this, _$identity);
 }
 
-abstract class _SigninFormState implements SigninFormState {
+abstract class _SigninFormState implements SignInFormState {
   const factory _SigninFormState(
       {required final Either<String, String> email,
       required final Either<String, String> password,
