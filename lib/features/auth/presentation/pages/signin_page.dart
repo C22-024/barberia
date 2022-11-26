@@ -43,18 +43,21 @@ class SignInPage extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.errorMessagesShown != current.errorMessagesShown,
         builder: (context, state) {
-          return Scaffold(
-            appBar: BAppBar.defaultWithBackButton(context, 'Masuk'),
-            body: _SignInPageBody(state.errorMessagesShown),
-            bottomSheet: Hero(
-              tag: 'button1',
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: BButton(
-                  label: 'Masuk',
-                  onPressed: () => context
-                      .read<SignInFormBloc>()
-                      .add(const SignInFormEvent.signInButtonPressed()),
+          return GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Scaffold(
+              appBar: BAppBar.defaultWithBackButton(context, 'Masuk'),
+              body: _SignInPageBody(state.errorMessagesShown),
+              bottomSheet: Hero(
+                tag: 'button1',
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: BButton(
+                    label: 'Masuk',
+                    onPressed: () => context
+                        .read<SignInFormBloc>()
+                        .add(const SignInFormEvent.signInButtonPressed()),
+                  ),
                 ),
               ),
             ),
