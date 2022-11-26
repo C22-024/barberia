@@ -2,24 +2,23 @@ import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:barberia_ui/barberia_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../common_widgets/spacing.dart';
 import '../../../../constants/auth_failure_messages.dart';
 import '../../../../injection.dart';
 import '../bloc/auth_bloc/auth_bloc.dart';
-import '../bloc/signin_form_bloc/signin_form_bloc.dart';
+import '../bloc/signup_form_bloc/signup_form_bloc.dart';
 import '../widgets/email_form_field.dart';
 import '../widgets/password_form_field.dart';
 
-class SignInPage extends StatelessWidget {
-  const SignInPage({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<SignInFormBloc>(),
-      child: BlocConsumer<SignInFormBloc, SignInFormState>(
+      create: (context) => getIt<SignUpFormBloc>(),
+      child: BlocConsumer<SignUpFormBloc, SignUpFormState>(
         listenWhen: (previous, current) =>
             previous.authFailureOrSuccessOption !=
             current.authFailureOrSuccessOption,
@@ -28,8 +27,9 @@ class SignInPage extends StatelessWidget {
             () => null,
             (failureOrSuccess) => failureOrSuccess.fold(
               (failure) => failure.maybeWhen(
-                invalidEmailOrPassword: () =>
-                    AuthFailureMessages.invalidEmailOrPassword,
+                emailAlreadyInUse: () => AuthFailureMessages.emailAlreadyInUse,
+                weakPassword: () => AuthFailureMessages.weakPassword,
+                invalidEmail: () => AuthFailureMessages.invalidEmail,
                 timeout: () => AuthFailureMessages.timeout,
                 orElse: () => AuthFailureMessages.unexpected,
               ),
@@ -52,17 +52,17 @@ class SignInPage extends StatelessWidget {
           return GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             child: Scaffold(
-              appBar: BAppBar.defaultWithBackButton(context, 'Masuk'),
-              body: _SignInPageBody(state.errorMessagesShown),
+              appBar: BAppBar.defaultWithBackButton(context, 'Buat Akun Baru'),
+              body: _SignUpPageBody(state.errorMessagesShown),
               bottomSheet: Hero(
-                tag: 'button1',
+                tag: 'button0',
                 child: Padding(
                   padding: const EdgeInsets.all(16),
                   child: BButton(
-                    label: 'Masuk',
+                    label: 'Buat Akun',
                     onPressed: () => context
-                        .read<SignInFormBloc>()
-                        .add(const SignInFormEvent.signInButtonPressed()),
+                        .read<SignUpFormBloc>()
+                        .add(const SignUpFormEvent.signUpButtonPressed()),
                   ),
                 ),
               ),
@@ -74,8 +74,8 @@ class SignInPage extends StatelessWidget {
   }
 }
 
-class _SignInPageBody extends StatelessWidget {
-  const _SignInPageBody(this.errorMessagesShown);
+class _SignUpPageBody extends StatelessWidget {
+  const _SignUpPageBody(this.errorMessagesShown);
 
   final bool errorMessagesShown;
 
@@ -86,26 +86,15 @@ class _SignInPageBody extends StatelessWidget {
           ? AutovalidateMode.always
           : AutovalidateMode.disabled,
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Hero(
-              tag: 'display-text',
-              child: Material(
-                type: MaterialType.transparency,
-                child: BText.display(
-                  'Welcome back!',
-                  maxLines: 2,
-                ),
-              ),
-            ),
-            verticalSpace16,
             EmailFormField(
               onChanged: (email) => context
-                  .read<SignInFormBloc>()
-                  .add(SignInFormEvent.emailChanged(email)),
+                  .read<SignUpFormBloc>()
+                  .add(SignUpFormEvent.emailChanged(email)),
               validator: (_) {
-                return context.read<SignInFormBloc>().state.email.fold(
+                return context.read<SignUpFormBloc>().state.email.fold(
                       (failure) => failure.message,
                       (_) => null,
                     );
@@ -113,26 +102,33 @@ class _SignInPageBody extends StatelessWidget {
             ),
             verticalSpace8,
             PasswordFormField(
-              hintText: 'Kata sandi',
+              hintText: 'Kata Sandi',
               onChanged: (password) => context
-                  .read<SignInFormBloc>()
-                  .add(SignInFormEvent.passwordChanged(password)),
+                  .read<SignUpFormBloc>()
+                  .add(SignUpFormEvent.passwordChanged(password)),
               validator: (_) {
-                return context.read<SignInFormBloc>().state.password.fold(
+                return context.read<SignUpFormBloc>().state.password.fold(
                       (failure) => failure.message,
                       (_) => null,
                     );
               },
             ),
-            Align(
-              alignment: Alignment.centerRight,
-              child: BButton(
-                label: 'Lupa kata sandi?',
-                variant: BButtonVariant.bare,
-                dense: true,
-                size: BWidgetSize.mini,
-                onPressed: () => context.pushNamed('reset-password'),
-              ),
+            verticalSpace8,
+            PasswordFormField(
+              hintText: 'Konfirmasi Kata Sandi',
+              onChanged: (confirmationPassword) => context
+                  .read<SignUpFormBloc>()
+                  .add(SignUpFormEvent.confirmationPasswordChanged(
+                    confirmationPassword,
+                  )),
+              validator: (_) {
+                return context
+                        .read<SignUpFormBloc>()
+                        .state
+                        .isConfirmationPasswordValid
+                    ? null
+                    : 'Kata sandi tidak cocok.';
+              },
             ),
           ],
         ),

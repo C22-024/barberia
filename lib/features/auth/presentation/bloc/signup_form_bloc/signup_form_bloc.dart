@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../../../exceptions/value_failure.dart';
 import '../../../../../utils/value_validators.dart';
 import '../../../domain/auth_failure.dart';
 import '../../../domain/usecase/create_user_with_email_and_password.dart';
@@ -16,25 +17,46 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
   SignUpFormBloc(this.createUserWithEmailAndPassword)
       : super(SignUpFormState.initial()) {
     on<SignUpFormEvent>((event, emit) async {
-      event.when(
+      await event.when(
         emailChanged: (email) => _handleEmailChanged(emit, email),
         passwordChanged: (password) => _handlePasswordChanged(emit, password),
+        confirmationPasswordChanged: (confirmationPassword) =>
+            _handleConfirmationPasswordChange(emit, confirmationPassword),
         signUpButtonPressed: () => _handleSignUpButtonPressed(emit),
       );
     });
   }
 
-  void _handleEmailChanged(Emitter<SignUpFormState> emit, String email) {
+  Future<void> _handleEmailChanged(
+    Emitter<SignUpFormState> emit,
+    String email,
+  ) async {
+    emit(state.copyWith(email: validateEmailAddress(email)));
+  }
+
+  Future<void> _handlePasswordChanged(
+    Emitter<SignUpFormState> emit,
+    String password,
+  ) async {
+    final isConfirmationPasswordValid = state.confirmationPassword == password;
     emit(state.copyWith(
-      email: validateEmailAddress(email),
-      authFailureOrSuccessOption: none(),
+      password: validatePassword(password, 8),
+      isConfirmationPasswordValid: isConfirmationPasswordValid,
     ));
   }
 
-  void _handlePasswordChanged(Emitter<SignUpFormState> emit, String password) {
+  Future<void> _handleConfirmationPasswordChange(
+    Emitter<SignUpFormState> emit,
+    String confirmationPassword,
+  ) async {
+    final password = state.password.fold(
+      (failure) => failure.value,
+      (value) => value,
+    );
+    final isConfirmationPasswordValid = confirmationPassword == password;
     emit(state.copyWith(
-      email: validatePassword(password, 8),
-      authFailureOrSuccessOption: none(),
+      confirmationPassword: confirmationPassword,
+      isConfirmationPasswordValid: isConfirmationPasswordValid,
     ));
   }
 
@@ -43,7 +65,7 @@ class SignUpFormBloc extends Bloc<SignUpFormEvent, SignUpFormState> {
     final isPasswordValid = state.password.isRight();
     Either<AuthFailure, Unit>? failureOrSuccess;
 
-    if (isEmailValid && isPasswordValid) {
+    if (isEmailValid && isPasswordValid && state.isConfirmationPasswordValid) {
       emit(state.copyWith(
         isSubmitting: true,
         authFailureOrSuccessOption: none(),
