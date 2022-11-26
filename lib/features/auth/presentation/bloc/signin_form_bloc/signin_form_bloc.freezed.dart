@@ -469,8 +469,10 @@ abstract class _SignInButtonPressed implements SignInFormEvent {
 
 /// @nodoc
 mixin _$SignInFormState {
-  Either<String, String> get email => throw _privateConstructorUsedError;
-  Either<String, String> get password => throw _privateConstructorUsedError;
+  Either<ValueFailure<String>, String> get email =>
+      throw _privateConstructorUsedError;
+  Either<ValueFailure<String>, String> get password =>
+      throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   bool get errorMessagesShown => throw _privateConstructorUsedError;
   Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption =>
@@ -488,8 +490,8 @@ abstract class $SignInFormStateCopyWith<$Res> {
       _$SignInFormStateCopyWithImpl<$Res, SignInFormState>;
   @useResult
   $Res call(
-      {Either<String, String> email,
-      Either<String, String> password,
+      {Either<ValueFailure<String>, String> email,
+      Either<ValueFailure<String>, String> password,
       bool isSubmitting,
       bool errorMessagesShown,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
@@ -518,11 +520,11 @@ class _$SignInFormStateCopyWithImpl<$Res, $Val extends SignInFormState>
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as Either<String, String>,
+              as Either<ValueFailure<String>, String>,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as Either<String, String>,
+              as Either<ValueFailure<String>, String>,
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
@@ -548,8 +550,8 @@ abstract class _$$_SigninFormStateCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Either<String, String> email,
-      Either<String, String> password,
+      {Either<ValueFailure<String>, String> email,
+      Either<ValueFailure<String>, String> password,
       bool isSubmitting,
       bool errorMessagesShown,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
@@ -576,11 +578,11 @@ class __$$_SigninFormStateCopyWithImpl<$Res>
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as Either<String, String>,
+              as Either<ValueFailure<String>, String>,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
-              as Either<String, String>,
+              as Either<ValueFailure<String>, String>,
       isSubmitting: null == isSubmitting
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
@@ -608,9 +610,9 @@ class _$_SigninFormState implements _SigninFormState {
       required this.authFailureOrSuccessOption});
 
   @override
-  final Either<String, String> email;
+  final Either<ValueFailure<String>, String> email;
   @override
-  final Either<String, String> password;
+  final Either<ValueFailure<String>, String> password;
   @override
   final bool isSubmitting;
   @override
@@ -654,17 +656,17 @@ class _$_SigninFormState implements _SigninFormState {
 
 abstract class _SigninFormState implements SignInFormState {
   const factory _SigninFormState(
-      {required final Either<String, String> email,
-      required final Either<String, String> password,
+      {required final Either<ValueFailure<String>, String> email,
+      required final Either<ValueFailure<String>, String> password,
       required final bool isSubmitting,
       required final bool errorMessagesShown,
       required final Option<Either<AuthFailure, Unit>>
           authFailureOrSuccessOption}) = _$_SigninFormState;
 
   @override
-  Either<String, String> get email;
+  Either<ValueFailure<String>, String> get email;
   @override
-  Either<String, String> get password;
+  Either<ValueFailure<String>, String> get password;
   @override
   bool get isSubmitting;
   @override

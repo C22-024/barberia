@@ -97,7 +97,7 @@ class _SignInPageBody extends StatelessWidget {
                   .add(SignInFormEvent.emailChanged(email)),
               validator: (_) {
                 return context.read<SignInFormBloc>().state.email.fold(
-                      (l) => l,
+                      (failure) => failure.message,
                       (_) => null,
                     );
               },
@@ -110,7 +110,7 @@ class _SignInPageBody extends StatelessWidget {
                   .add(SignInFormEvent.passwordChanged(password)),
               validator: (_) {
                 return context.read<SignInFormBloc>().state.password.fold(
-                      (l) => l,
+                      (failure) => failure.message,
                       (_) => null,
                     );
               },

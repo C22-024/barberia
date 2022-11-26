@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../../../../exceptions/value_failure.dart';
 import '../../../../../utils/value_validators.dart';
 import '../../../domain/auth_failure.dart';
 import '../../../domain/usecase/signin_with_email_and_password.dart';
@@ -26,18 +27,12 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
 
   Future<void> _handleEmailChanged(
       Emitter<SignInFormState> emit, String email) async {
-    emit(state.copyWith(
-      email: validateEmailAddress(email),
-      authFailureOrSuccessOption: none(),
-    ));
+    emit(state.copyWith(email: validateEmailAddress(email)));
   }
 
   Future<void> _handlePasswordChanged(
       Emitter<SignInFormState> emit, String password) async {
-    emit(state.copyWith(
-      password: validatePassword(password, 8),
-      authFailureOrSuccessOption: none(),
-    ));
+    emit(state.copyWith(password: validatePassword(password, 8)));
   }
 
   Future<void> _handleSignInButtonPressed(Emitter<SignInFormState> emit) async {
