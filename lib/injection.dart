@@ -1,3 +1,5 @@
+import 'package:barberia/features/auth/domain/usecase/send_password_reset_email.dart';
+import 'package:barberia/features/auth/presentation/bloc/password_reset_form_bloc/password_reset_form_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 
@@ -21,12 +23,14 @@ void init() {
       ));
   getIt.registerFactory(() => SignInFormBloc(getIt()));
   getIt.registerFactory(() => SignUpFormBloc(getIt()));
+  getIt.registerFactory(() => PasswordResetFormBloc(getIt()));
 
   // usecase
   getIt.registerLazySingleton<GetSignedInUser>(() => GetSignedInUser(getIt()));
   getIt.registerLazySingleton<SignOut>(() => SignOut(getIt()));
   getIt.registerLazySingleton(() => SigninWithEmailAndPassword(getIt()));
   getIt.registerLazySingleton(() => CreateUserWithEmailAndPassword(getIt()));
+  getIt.registerLazySingleton(() => SendPasswordResetEmail(getIt()));
 
   // repository
   getIt.registerLazySingleton<AuthFacade>(() => AuthFacadeImpl(getIt()));
