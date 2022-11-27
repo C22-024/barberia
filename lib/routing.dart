@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:barberia/features/auth/presentation/pages/password_reset_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
@@ -46,10 +47,9 @@ final router = GoRouter(
           builder: (context, state) => const SignInPage(),
           routes: [
             GoRoute(
-              name: 'reset-password',
-              path: 'reset-password',
-              builder: (context, state) =>
-                  const PlaceholderPage('Reset Password'),
+              name: 'password-reset',
+              path: 'password-reset',
+              builder: (context, state) => const PasswordResetPage(),
             ),
           ],
         ),

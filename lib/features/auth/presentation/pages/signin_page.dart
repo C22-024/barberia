@@ -12,6 +12,7 @@ import '../bloc/signin_form_bloc/signin_form_bloc.dart';
 import '../widgets/email_form_field.dart';
 import '../widgets/password_form_field.dart';
 
+// TODO: Implement button busy
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
 
@@ -131,7 +132,7 @@ class _SignInPageBody extends StatelessWidget {
                 variant: BButtonVariant.bare,
                 dense: true,
                 size: BWidgetSize.mini,
-                onPressed: () => context.pushNamed('reset-password'),
+                onPressed: () => context.pushNamed('password-reset'),
               ),
             ),
           ],

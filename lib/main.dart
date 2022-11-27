@@ -12,6 +12,6 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   init();
-  await getIt<FirebaseAuth>().useAuthEmulator('localhost', 9099);
+  await getIt<FirebaseAuth>().useAuthEmulator('192.168.103.194', 9099);
   runApp(const MyApp());
 }
