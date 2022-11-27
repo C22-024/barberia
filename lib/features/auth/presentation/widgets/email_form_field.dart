@@ -6,16 +6,19 @@ class EmailFormField extends StatelessWidget {
     super.key,
     this.controller,
     this.validator,
+    this.autovalidateMode,
     required this.onChanged,
   });
 
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final ValueChanged<String> onChanged;
+  final AutovalidateMode? autovalidateMode;
 
   @override
   Widget build(BuildContext context) {
     return BTextFormField(
+      autovalidateMode: autovalidateMode,
       hintText: 'Email',
       prefixIcon: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 12),

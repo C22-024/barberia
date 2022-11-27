@@ -89,6 +89,17 @@ class _SignUpPageBody extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
+            Hero(
+              tag: 'display-text',
+              child: Material(
+                type: MaterialType.transparency,
+                child: BText.display(
+                  'Daftar sekarang dan rasakan kemudahannya!',
+                  maxLines: 8,
+                ),
+              ),
+            ),
+            verticalSpace16,
             EmailFormField(
               onChanged: (email) => context
                   .read<SignUpFormBloc>()
