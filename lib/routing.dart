@@ -79,9 +79,8 @@ final router = GoRouter(
               redirectPath = '/home';
             }
 
-            // from welcome page
-            if (state.subloc.startsWith('/welcome') ||
-                state.subloc == '/profile-setup') {
+            // not in the redirect path
+            if (state.subloc != redirectPath) {
               return redirectPath;
             }
 
