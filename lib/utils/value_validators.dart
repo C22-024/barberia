@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 
-import '../exceptions/value_failure.dart';
+import '../failures/value_failure.dart';
 
 Either<ValueFailure<String>, String> validateEmailAddress(String input) {
   const emailRegex =
@@ -19,5 +19,16 @@ Either<ValueFailure<String>, String> validatePassword(
   } else {
     return left(
         ValueFailure(input, message: 'Panjang kata sandi harus >= $minLength'));
+  }
+}
+
+Either<ValueFailure<String>, String> validateName(String input) {
+  const minLength = 3;
+
+  if (input.length >= minLength) {
+    return right(input);
+  } else {
+    return left(
+        ValueFailure(input, message: 'Panjang nama harus >= $minLength'));
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../../exceptions/value_failure.dart';
+import '../../../../../failures/value_failure.dart';
 import '../../../../../utils/value_validators.dart';
 import '../../../domain/auth_failure.dart';
 import '../../../domain/usecase/create_user_with_email_and_password.dart';

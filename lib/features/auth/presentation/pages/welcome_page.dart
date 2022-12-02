@@ -1,11 +1,38 @@
+import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:barberia_ui/barberia_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../common_widgets/spacing.dart';
+import '../../../../constants/unauthenticated_reason.dart';
+import '../../../../injection.dart';
+import '../bloc/auth_bloc/auth_bloc.dart';
 
-class WelcomePage extends StatelessWidget {
+class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
+
+  @override
+  State<WelcomePage> createState() => _WelcomePageState();
+}
+
+class _WelcomePageState extends State<WelcomePage> {
+  @override
+  void initState() {
+    getIt<AuthBloc>().state.maybeWhen(
+          unauthenticated: (reason) {
+            if (reason == UnauthenticatedReason.failedToLoadProfile) {
+              SchedulerBinding.instance.addPostFrameCallback((_) {
+                FlushbarHelper.createError(
+                  message: 'Terjadi kesalahan saat memuat profil.',
+                ).show(context);
+              });
+            }
+          },
+          orElse: () {},
+        );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

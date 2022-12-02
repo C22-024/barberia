@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:fpdart/fpdart.dart';
 
+import '../../../../utils/firebase_user_mapper.dart';
 import '../../domain/auth_failure.dart';
 import '../../domain/entities/user.dart';
 import '../../domain/repositories/auth_facade.dart';
-import 'firebase_user_mapper.dart';
 
 class AuthFacadeImpl implements AuthFacade {
   AuthFacadeImpl(this._firebaseAuth);

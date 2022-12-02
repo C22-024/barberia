@@ -19,18 +19,22 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() authCheckRequested,
+    required TResult Function(Either<Failure, User> failureOrUser)
+        userProfileReceived,
     required TResult Function() signedOutRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? authCheckRequested,
+    TResult? Function(Either<Failure, User> failureOrUser)? userProfileReceived,
     TResult? Function()? signedOutRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? authCheckRequested,
+    TResult Function(Either<Failure, User> failureOrUser)? userProfileReceived,
     TResult Function()? signedOutRequested,
     required TResult orElse(),
   }) =>
@@ -38,18 +42,21 @@ mixin _$AuthEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AuthCheckRequested value) authCheckRequested,
+    required TResult Function(_UserProfileReceived value) userProfileReceived,
     required TResult Function(_SignedOutRequested value) signedOutRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AuthCheckRequested value)? authCheckRequested,
+    TResult? Function(_UserProfileReceived value)? userProfileReceived,
     TResult? Function(_SignedOutRequested value)? signedOutRequested,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AuthCheckRequested value)? authCheckRequested,
+    TResult Function(_UserProfileReceived value)? userProfileReceived,
     TResult Function(_SignedOutRequested value)? signedOutRequested,
     required TResult orElse(),
   }) =>
@@ -112,6 +119,8 @@ class _$_AuthCheckRequested implements _AuthCheckRequested {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() authCheckRequested,
+    required TResult Function(Either<Failure, User> failureOrUser)
+        userProfileReceived,
     required TResult Function() signedOutRequested,
   }) {
     return authCheckRequested();
@@ -121,6 +130,7 @@ class _$_AuthCheckRequested implements _AuthCheckRequested {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? authCheckRequested,
+    TResult? Function(Either<Failure, User> failureOrUser)? userProfileReceived,
     TResult? Function()? signedOutRequested,
   }) {
     return authCheckRequested?.call();
@@ -130,6 +140,7 @@ class _$_AuthCheckRequested implements _AuthCheckRequested {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? authCheckRequested,
+    TResult Function(Either<Failure, User> failureOrUser)? userProfileReceived,
     TResult Function()? signedOutRequested,
     required TResult orElse(),
   }) {
@@ -143,6 +154,7 @@ class _$_AuthCheckRequested implements _AuthCheckRequested {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AuthCheckRequested value) authCheckRequested,
+    required TResult Function(_UserProfileReceived value) userProfileReceived,
     required TResult Function(_SignedOutRequested value) signedOutRequested,
   }) {
     return authCheckRequested(this);
@@ -152,6 +164,7 @@ class _$_AuthCheckRequested implements _AuthCheckRequested {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AuthCheckRequested value)? authCheckRequested,
+    TResult? Function(_UserProfileReceived value)? userProfileReceived,
     TResult? Function(_SignedOutRequested value)? signedOutRequested,
   }) {
     return authCheckRequested?.call(this);
@@ -161,6 +174,7 @@ class _$_AuthCheckRequested implements _AuthCheckRequested {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AuthCheckRequested value)? authCheckRequested,
+    TResult Function(_UserProfileReceived value)? userProfileReceived,
     TResult Function(_SignedOutRequested value)? signedOutRequested,
     required TResult orElse(),
   }) {
@@ -173,6 +187,149 @@ class _$_AuthCheckRequested implements _AuthCheckRequested {
 
 abstract class _AuthCheckRequested implements AuthEvent {
   const factory _AuthCheckRequested() = _$_AuthCheckRequested;
+}
+
+/// @nodoc
+abstract class _$$_UserProfileReceivedCopyWith<$Res> {
+  factory _$$_UserProfileReceivedCopyWith(_$_UserProfileReceived value,
+          $Res Function(_$_UserProfileReceived) then) =
+      __$$_UserProfileReceivedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Either<Failure, User> failureOrUser});
+}
+
+/// @nodoc
+class __$$_UserProfileReceivedCopyWithImpl<$Res>
+    extends _$AuthEventCopyWithImpl<$Res, _$_UserProfileReceived>
+    implements _$$_UserProfileReceivedCopyWith<$Res> {
+  __$$_UserProfileReceivedCopyWithImpl(_$_UserProfileReceived _value,
+      $Res Function(_$_UserProfileReceived) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? failureOrUser = null,
+  }) {
+    return _then(_$_UserProfileReceived(
+      null == failureOrUser
+          ? _value.failureOrUser
+          : failureOrUser // ignore: cast_nullable_to_non_nullable
+              as Either<Failure, User>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UserProfileReceived implements _UserProfileReceived {
+  const _$_UserProfileReceived(this.failureOrUser);
+
+  @override
+  final Either<Failure, User> failureOrUser;
+
+  @override
+  String toString() {
+    return 'AuthEvent.userProfileReceived(failureOrUser: $failureOrUser)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UserProfileReceived &&
+            (identical(other.failureOrUser, failureOrUser) ||
+                other.failureOrUser == failureOrUser));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, failureOrUser);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UserProfileReceivedCopyWith<_$_UserProfileReceived> get copyWith =>
+      __$$_UserProfileReceivedCopyWithImpl<_$_UserProfileReceived>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() authCheckRequested,
+    required TResult Function(Either<Failure, User> failureOrUser)
+        userProfileReceived,
+    required TResult Function() signedOutRequested,
+  }) {
+    return userProfileReceived(failureOrUser);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? authCheckRequested,
+    TResult? Function(Either<Failure, User> failureOrUser)? userProfileReceived,
+    TResult? Function()? signedOutRequested,
+  }) {
+    return userProfileReceived?.call(failureOrUser);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? authCheckRequested,
+    TResult Function(Either<Failure, User> failureOrUser)? userProfileReceived,
+    TResult Function()? signedOutRequested,
+    required TResult orElse(),
+  }) {
+    if (userProfileReceived != null) {
+      return userProfileReceived(failureOrUser);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_AuthCheckRequested value) authCheckRequested,
+    required TResult Function(_UserProfileReceived value) userProfileReceived,
+    required TResult Function(_SignedOutRequested value) signedOutRequested,
+  }) {
+    return userProfileReceived(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_AuthCheckRequested value)? authCheckRequested,
+    TResult? Function(_UserProfileReceived value)? userProfileReceived,
+    TResult? Function(_SignedOutRequested value)? signedOutRequested,
+  }) {
+    return userProfileReceived?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_AuthCheckRequested value)? authCheckRequested,
+    TResult Function(_UserProfileReceived value)? userProfileReceived,
+    TResult Function(_SignedOutRequested value)? signedOutRequested,
+    required TResult orElse(),
+  }) {
+    if (userProfileReceived != null) {
+      return userProfileReceived(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UserProfileReceived implements AuthEvent {
+  const factory _UserProfileReceived(
+      final Either<Failure, User> failureOrUser) = _$_UserProfileReceived;
+
+  Either<Failure, User> get failureOrUser;
+  @JsonKey(ignore: true)
+  _$$_UserProfileReceivedCopyWith<_$_UserProfileReceived> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -214,6 +371,8 @@ class _$_SignedOutRequested implements _SignedOutRequested {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() authCheckRequested,
+    required TResult Function(Either<Failure, User> failureOrUser)
+        userProfileReceived,
     required TResult Function() signedOutRequested,
   }) {
     return signedOutRequested();
@@ -223,6 +382,7 @@ class _$_SignedOutRequested implements _SignedOutRequested {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? authCheckRequested,
+    TResult? Function(Either<Failure, User> failureOrUser)? userProfileReceived,
     TResult? Function()? signedOutRequested,
   }) {
     return signedOutRequested?.call();
@@ -232,6 +392,7 @@ class _$_SignedOutRequested implements _SignedOutRequested {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? authCheckRequested,
+    TResult Function(Either<Failure, User> failureOrUser)? userProfileReceived,
     TResult Function()? signedOutRequested,
     required TResult orElse(),
   }) {
@@ -245,6 +406,7 @@ class _$_SignedOutRequested implements _SignedOutRequested {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_AuthCheckRequested value) authCheckRequested,
+    required TResult Function(_UserProfileReceived value) userProfileReceived,
     required TResult Function(_SignedOutRequested value) signedOutRequested,
   }) {
     return signedOutRequested(this);
@@ -254,6 +416,7 @@ class _$_SignedOutRequested implements _SignedOutRequested {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_AuthCheckRequested value)? authCheckRequested,
+    TResult? Function(_UserProfileReceived value)? userProfileReceived,
     TResult? Function(_SignedOutRequested value)? signedOutRequested,
   }) {
     return signedOutRequested?.call(this);
@@ -263,6 +426,7 @@ class _$_SignedOutRequested implements _SignedOutRequested {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_AuthCheckRequested value)? authCheckRequested,
+    TResult Function(_UserProfileReceived value)? userProfileReceived,
     TResult Function(_SignedOutRequested value)? signedOutRequested,
     required TResult orElse(),
   }) {
@@ -283,21 +447,21 @@ mixin _$AuthState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(User user) authenticated,
-    required TResult Function() unauthenticated,
+    required TResult Function(UnauthenticatedReason reason) unauthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(User user)? authenticated,
-    TResult? Function()? unauthenticated,
+    TResult? Function(UnauthenticatedReason reason)? unauthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(UnauthenticatedReason reason)? unauthenticated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -381,7 +545,7 @@ class _$_Initial implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(User user) authenticated,
-    required TResult Function() unauthenticated,
+    required TResult Function(UnauthenticatedReason reason) unauthenticated,
   }) {
     return initial();
   }
@@ -391,7 +555,7 @@ class _$_Initial implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(User user)? authenticated,
-    TResult? Function()? unauthenticated,
+    TResult? Function(UnauthenticatedReason reason)? unauthenticated,
   }) {
     return initial?.call();
   }
@@ -401,7 +565,7 @@ class _$_Initial implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(UnauthenticatedReason reason)? unauthenticated,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -525,7 +689,7 @@ class _$_Authenticated implements _Authenticated {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(User user) authenticated,
-    required TResult Function() unauthenticated,
+    required TResult Function(UnauthenticatedReason reason) unauthenticated,
   }) {
     return authenticated(user);
   }
@@ -535,7 +699,7 @@ class _$_Authenticated implements _Authenticated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(User user)? authenticated,
-    TResult? Function()? unauthenticated,
+    TResult? Function(UnauthenticatedReason reason)? unauthenticated,
   }) {
     return authenticated?.call(user);
   }
@@ -545,7 +709,7 @@ class _$_Authenticated implements _Authenticated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(UnauthenticatedReason reason)? unauthenticated,
     required TResult orElse(),
   }) {
     if (authenticated != null) {
@@ -603,6 +767,8 @@ abstract class _$$_UnauthenticatedCopyWith<$Res> {
   factory _$$_UnauthenticatedCopyWith(
           _$_Unauthenticated value, $Res Function(_$_Unauthenticated) then) =
       __$$_UnauthenticatedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({UnauthenticatedReason reason});
 }
 
 /// @nodoc
@@ -612,35 +778,59 @@ class __$$_UnauthenticatedCopyWithImpl<$Res>
   __$$_UnauthenticatedCopyWithImpl(
       _$_Unauthenticated _value, $Res Function(_$_Unauthenticated) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? reason = null,
+  }) {
+    return _then(_$_Unauthenticated(
+      null == reason
+          ? _value.reason
+          : reason // ignore: cast_nullable_to_non_nullable
+              as UnauthenticatedReason,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Unauthenticated implements _Unauthenticated {
-  const _$_Unauthenticated();
+  const _$_Unauthenticated(this.reason);
+
+  @override
+  final UnauthenticatedReason reason;
 
   @override
   String toString() {
-    return 'AuthState.unauthenticated()';
+    return 'AuthState.unauthenticated(reason: $reason)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Unauthenticated);
+        (other.runtimeType == runtimeType &&
+            other is _$_Unauthenticated &&
+            (identical(other.reason, reason) || other.reason == reason));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, reason);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UnauthenticatedCopyWith<_$_Unauthenticated> get copyWith =>
+      __$$_UnauthenticatedCopyWithImpl<_$_Unauthenticated>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(User user) authenticated,
-    required TResult Function() unauthenticated,
+    required TResult Function(UnauthenticatedReason reason) unauthenticated,
   }) {
-    return unauthenticated();
+    return unauthenticated(reason);
   }
 
   @override
@@ -648,9 +838,9 @@ class _$_Unauthenticated implements _Unauthenticated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(User user)? authenticated,
-    TResult? Function()? unauthenticated,
+    TResult? Function(UnauthenticatedReason reason)? unauthenticated,
   }) {
-    return unauthenticated?.call();
+    return unauthenticated?.call(reason);
   }
 
   @override
@@ -658,11 +848,11 @@ class _$_Unauthenticated implements _Unauthenticated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(User user)? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(UnauthenticatedReason reason)? unauthenticated,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
-      return unauthenticated();
+      return unauthenticated(reason);
     }
     return orElse();
   }
@@ -703,5 +893,11 @@ class _$_Unauthenticated implements _Unauthenticated {
 }
 
 abstract class _Unauthenticated implements AuthState {
-  const factory _Unauthenticated() = _$_Unauthenticated;
+  const factory _Unauthenticated(final UnauthenticatedReason reason) =
+      _$_Unauthenticated;
+
+  UnauthenticatedReason get reason;
+  @JsonKey(ignore: true)
+  _$$_UnauthenticatedCopyWith<_$_Unauthenticated> get copyWith =>
+      throw _privateConstructorUsedError;
 }
