@@ -18,7 +18,7 @@ class PasswordResetPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<PasswordResetFormBloc>(),
-      child: BlocConsumer<PasswordResetFormBloc, PasswordResetFormState>(
+      child: BlocListener<PasswordResetFormBloc, PasswordResetFormState>(
         listenWhen: (previous, current) =>
             previous.sendEmailFailureOrSuccessOption !=
             current.sendEmailFailureOrSuccessOption,
@@ -45,28 +45,34 @@ class PasswordResetPage extends StatelessWidget {
             ),
           );
         },
-        buildWhen: (previous, current) =>
-            previous.errorMessagesShown != current.errorMessagesShown,
-        builder: (context, state) {
-          return GestureDetector(
-            onTap: () => FocusScope.of(context).unfocus(),
-            child: Scaffold(
-              appBar: BAppBar.defaultWithBackButton(context, 'Lupa Kata Sandi'),
-              body: const _PasswordResetPageBody(),
-              bottomSheet: Hero(
-                tag: 'button1',
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: BButton(
-                    label: 'Kirim',
-                    onPressed: () => context.read<PasswordResetFormBloc>().add(
-                        const PasswordResetFormEvent.submitButtonPressed()),
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Scaffold(
+            appBar: BAppBar.defaultWithBackButton(context, 'Lupa Kata Sandi'),
+            body: const _PasswordResetPageBody(),
+            bottomSheet:
+                BlocBuilder<PasswordResetFormBloc, PasswordResetFormState>(
+              buildWhen: (previous, current) =>
+                  previous.isSubmitting != current.isSubmitting,
+              builder: (context, state) {
+                return Hero(
+                  tag: 'button1',
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: BButton(
+                      label: 'Kirim',
+                      busy: state.isSubmitting,
+                      onPressed: () => context
+                          .read<PasswordResetFormBloc>()
+                          .add(const PasswordResetFormEvent
+                              .submitButtonPressed()),
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

@@ -12,7 +12,6 @@ import '../bloc/signin_form_bloc/signin_form_bloc.dart';
 import '../widgets/email_form_field.dart';
 import '../widgets/password_form_field.dart';
 
-// TODO: Implement button busy
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
 
@@ -55,17 +54,24 @@ class SignInPage extends StatelessWidget {
             child: Scaffold(
               appBar: BAppBar.defaultWithBackButton(context, 'Masuk'),
               body: _SignInPageBody(state.errorMessagesShown),
-              bottomSheet: Hero(
-                tag: 'button1',
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: BButton(
-                    label: 'Masuk',
-                    onPressed: () => context
-                        .read<SignInFormBloc>()
-                        .add(const SignInFormEvent.signInButtonPressed()),
-                  ),
-                ),
+              bottomSheet: BlocBuilder<SignInFormBloc, SignInFormState>(
+                buildWhen: (previous, current) =>
+                    previous.isSubmitting != current.isSubmitting,
+                builder: (context, state) {
+                  return Hero(
+                    tag: 'button1',
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: BButton(
+                        label: 'Masuk',
+                        busy: state.isSubmitting,
+                        onPressed: () => context
+                            .read<SignInFormBloc>()
+                            .add(const SignInFormEvent.signInButtonPressed()),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           );
