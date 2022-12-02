@@ -1,0 +1,29 @@
+{
+  "emulators": {
+    "auth": {
+      "host": "0.0.0.0",
+      "port": 9099
+    },
+    "firestore": {
+      "host": "0.0.0.0",
+      "port": 9098
+    },
+    "ui": {
+      "enabled": true,
+      "host": "0.0.0.0",
+      "port": 9090
+    },
+    "singleProjectMode": true,
+    "storage": {
+      "host": "0.0.0.0",
+      "port": 9097
+    }
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  }
+}

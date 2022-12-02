@@ -18,43 +18,41 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Failure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() notFound,
     required TResult Function() timeout,
-    required TResult Function(String message) unexpected,
+    required TResult Function(
+            String message, Exception? error, StackTrace? stackTrace)
+        unexpected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? notFound,
     TResult? Function()? timeout,
-    TResult? Function(String message)? unexpected,
+    TResult? Function(String message, Exception? error, StackTrace? stackTrace)?
+        unexpected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? notFound,
     TResult Function()? timeout,
-    TResult Function(String message)? unexpected,
+    TResult Function(String message, Exception? error, StackTrace? stackTrace)?
+        unexpected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_NotFound value) notFound,
     required TResult Function(_Timeout value) timeout,
     required TResult Function(_Unexpected value) unexpected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_NotFound value)? notFound,
     TResult? Function(_Timeout value)? timeout,
     TResult? Function(_Unexpected value)? unexpected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NotFound value)? notFound,
     TResult Function(_Timeout value)? timeout,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
@@ -77,114 +75,6 @@ class _$FailureCopyWithImpl<$Res, $Val extends Failure>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$_NotFoundCopyWith<$Res> {
-  factory _$$_NotFoundCopyWith(
-          _$_NotFound value, $Res Function(_$_NotFound) then) =
-      __$$_NotFoundCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$_NotFoundCopyWithImpl<$Res>
-    extends _$FailureCopyWithImpl<$Res, _$_NotFound>
-    implements _$$_NotFoundCopyWith<$Res> {
-  __$$_NotFoundCopyWithImpl(
-      _$_NotFound _value, $Res Function(_$_NotFound) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$_NotFound implements _NotFound {
-  const _$_NotFound();
-
-  @override
-  String toString() {
-    return 'Failure.notFound()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_NotFound);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() notFound,
-    required TResult Function() timeout,
-    required TResult Function(String message) unexpected,
-  }) {
-    return notFound();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? notFound,
-    TResult? Function()? timeout,
-    TResult? Function(String message)? unexpected,
-  }) {
-    return notFound?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? notFound,
-    TResult Function()? timeout,
-    TResult Function(String message)? unexpected,
-    required TResult orElse(),
-  }) {
-    if (notFound != null) {
-      return notFound();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_NotFound value) notFound,
-    required TResult Function(_Timeout value) timeout,
-    required TResult Function(_Unexpected value) unexpected,
-  }) {
-    return notFound(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_NotFound value)? notFound,
-    TResult? Function(_Timeout value)? timeout,
-    TResult? Function(_Unexpected value)? unexpected,
-  }) {
-    return notFound?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NotFound value)? notFound,
-    TResult Function(_Timeout value)? timeout,
-    TResult Function(_Unexpected value)? unexpected,
-    required TResult orElse(),
-  }) {
-    if (notFound != null) {
-      return notFound(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _NotFound implements Failure {
-  const factory _NotFound() = _$_NotFound;
 }
 
 /// @nodoc
@@ -224,9 +114,10 @@ class _$_Timeout implements _Timeout {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() notFound,
     required TResult Function() timeout,
-    required TResult Function(String message) unexpected,
+    required TResult Function(
+            String message, Exception? error, StackTrace? stackTrace)
+        unexpected,
   }) {
     return timeout();
   }
@@ -234,9 +125,9 @@ class _$_Timeout implements _Timeout {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? notFound,
     TResult? Function()? timeout,
-    TResult? Function(String message)? unexpected,
+    TResult? Function(String message, Exception? error, StackTrace? stackTrace)?
+        unexpected,
   }) {
     return timeout?.call();
   }
@@ -244,9 +135,9 @@ class _$_Timeout implements _Timeout {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? notFound,
     TResult Function()? timeout,
-    TResult Function(String message)? unexpected,
+    TResult Function(String message, Exception? error, StackTrace? stackTrace)?
+        unexpected,
     required TResult orElse(),
   }) {
     if (timeout != null) {
@@ -258,7 +149,6 @@ class _$_Timeout implements _Timeout {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_NotFound value) notFound,
     required TResult Function(_Timeout value) timeout,
     required TResult Function(_Unexpected value) unexpected,
   }) {
@@ -268,7 +158,6 @@ class _$_Timeout implements _Timeout {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_NotFound value)? notFound,
     TResult? Function(_Timeout value)? timeout,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
@@ -278,7 +167,6 @@ class _$_Timeout implements _Timeout {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NotFound value)? notFound,
     TResult Function(_Timeout value)? timeout,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
@@ -300,7 +188,7 @@ abstract class _$$_UnexpectedCopyWith<$Res> {
           _$_Unexpected value, $Res Function(_$_Unexpected) then) =
       __$$_UnexpectedCopyWithImpl<$Res>;
   @useResult
-  $Res call({String message});
+  $Res call({String message, Exception? error, StackTrace? stackTrace});
 }
 
 /// @nodoc
@@ -315,12 +203,22 @@ class __$$_UnexpectedCopyWithImpl<$Res>
   @override
   $Res call({
     Object? message = null,
+    Object? error = freezed,
+    Object? stackTrace = freezed,
   }) {
     return _then(_$_Unexpected(
       null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as Exception?,
+      stackTrace: freezed == stackTrace
+          ? _value.stackTrace
+          : stackTrace // ignore: cast_nullable_to_non_nullable
+              as StackTrace?,
     ));
   }
 }
@@ -328,14 +226,18 @@ class __$$_UnexpectedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Unexpected implements _Unexpected {
-  const _$_Unexpected(this.message);
+  const _$_Unexpected(this.message, {this.error, this.stackTrace});
 
   @override
   final String message;
+  @override
+  final Exception? error;
+  @override
+  final StackTrace? stackTrace;
 
   @override
   String toString() {
-    return 'Failure.unexpected(message: $message)';
+    return 'Failure.unexpected(message: $message, error: $error, stackTrace: $stackTrace)';
   }
 
   @override
@@ -343,11 +245,14 @@ class _$_Unexpected implements _Unexpected {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Unexpected &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.error, error) || other.error == error) &&
+            (identical(other.stackTrace, stackTrace) ||
+                other.stackTrace == stackTrace));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message);
+  int get hashCode => Object.hash(runtimeType, message, error, stackTrace);
 
   @JsonKey(ignore: true)
   @override
@@ -358,33 +263,34 @@ class _$_Unexpected implements _Unexpected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() notFound,
     required TResult Function() timeout,
-    required TResult Function(String message) unexpected,
+    required TResult Function(
+            String message, Exception? error, StackTrace? stackTrace)
+        unexpected,
   }) {
-    return unexpected(message);
+    return unexpected(message, error, stackTrace);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? notFound,
     TResult? Function()? timeout,
-    TResult? Function(String message)? unexpected,
+    TResult? Function(String message, Exception? error, StackTrace? stackTrace)?
+        unexpected,
   }) {
-    return unexpected?.call(message);
+    return unexpected?.call(message, error, stackTrace);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? notFound,
     TResult Function()? timeout,
-    TResult Function(String message)? unexpected,
+    TResult Function(String message, Exception? error, StackTrace? stackTrace)?
+        unexpected,
     required TResult orElse(),
   }) {
     if (unexpected != null) {
-      return unexpected(message);
+      return unexpected(message, error, stackTrace);
     }
     return orElse();
   }
@@ -392,7 +298,6 @@ class _$_Unexpected implements _Unexpected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_NotFound value) notFound,
     required TResult Function(_Timeout value) timeout,
     required TResult Function(_Unexpected value) unexpected,
   }) {
@@ -402,7 +307,6 @@ class _$_Unexpected implements _Unexpected {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_NotFound value)? notFound,
     TResult? Function(_Timeout value)? timeout,
     TResult? Function(_Unexpected value)? unexpected,
   }) {
@@ -412,7 +316,6 @@ class _$_Unexpected implements _Unexpected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_NotFound value)? notFound,
     TResult Function(_Timeout value)? timeout,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
@@ -425,9 +328,12 @@ class _$_Unexpected implements _Unexpected {
 }
 
 abstract class _Unexpected implements Failure {
-  const factory _Unexpected(final String message) = _$_Unexpected;
+  const factory _Unexpected(final String message,
+      {final Exception? error, final StackTrace? stackTrace}) = _$_Unexpected;
 
   String get message;
+  Exception? get error;
+  StackTrace? get stackTrace;
   @JsonKey(ignore: true)
   _$$_UnexpectedCopyWith<_$_Unexpected> get copyWith =>
       throw _privateConstructorUsedError;

@@ -1,11 +1,13 @@
 import 'dart:async';
 
-import 'package:barberia/features/auth/presentation/pages/password_reset_page.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 import 'common_widgets/placeholder_page.dart';
 import 'features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
+import 'features/auth/presentation/pages/password_reset_page.dart';
+import 'features/auth/presentation/pages/profile_setup_page.dart';
 import 'features/auth/presentation/pages/signin_page.dart';
 import 'features/auth/presentation/pages/signup_page.dart';
 import 'features/auth/presentation/pages/splash_page.dart';
@@ -36,6 +38,11 @@ final router = GoRouter(
       ],
     ),
     GoRoute(
+      name: 'profile-setup',
+      path: '/profile-setup',
+      builder: (context, state) => const ProfileSetupPage(),
+    ),
+    GoRoute(
       parentNavigatorKey: _rootNavigatorKey,
       name: 'welcome',
       path: '/welcome',
@@ -63,24 +70,33 @@ final router = GoRouter(
   ],
   redirect: (_, state) async {
     return await getIt<AuthBloc>().state.when(
-          authenticated: (_) async {
+          authenticated: (user) async {
+            late final String redirectPath;
+
+            if (user.name == null) {
+              redirectPath = '/profile-setup';
+            } else {
+              redirectPath = '/home';
+            }
+
             // from welcome page
-            if (state.subloc.startsWith('/welcome')) {
-              return '/home';
+            if (state.subloc.startsWith('/welcome') ||
+                state.subloc == '/profile-setup') {
+              return redirectPath;
             }
 
             // from splash screen
             if (state.subloc == '/') {
               return await Future.delayed(
                 const Duration(seconds: 2),
-                () => '/home',
+                () => redirectPath,
               );
             }
 
             // no redirect
             return null;
           },
-          unauthenticated: () async {
+          unauthenticated: (_) async {
             // from splash screen
             if (state.subloc == '/') {
               return await Future.delayed(
