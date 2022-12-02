@@ -14,8 +14,8 @@ class PickImage {
   Future<File?> call() async {
     final xfile = await _imagePicker.pickImage(
       source: ImageSource.gallery,
-      maxWidth: 512,
-      maxHeight: 512,
+      maxWidth: 1024,
+      maxHeight: 1024,
     );
 
     if (xfile != null) {
