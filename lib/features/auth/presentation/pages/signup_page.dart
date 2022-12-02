@@ -108,6 +108,7 @@ class _SignUpPageBody extends StatelessWidget {
             ),
             verticalSpace16,
             EmailFormField(
+              textInputAction: TextInputAction.next,
               onChanged: (email) => context
                   .read<SignUpFormBloc>()
                   .add(SignUpFormEvent.emailChanged(email)),
@@ -121,6 +122,7 @@ class _SignUpPageBody extends StatelessWidget {
             verticalSpace8,
             PasswordFormField(
               hintText: 'Kata Sandi',
+              textInputAction: TextInputAction.next,
               onChanged: (password) => context
                   .read<SignUpFormBloc>()
                   .add(SignUpFormEvent.passwordChanged(password)),
@@ -134,6 +136,7 @@ class _SignUpPageBody extends StatelessWidget {
             verticalSpace8,
             PasswordFormField(
               hintText: 'Konfirmasi Kata Sandi',
+              textInputAction: TextInputAction.done,
               onChanged: (confirmationPassword) => context
                   .read<SignUpFormBloc>()
                   .add(SignUpFormEvent.confirmationPasswordChanged(

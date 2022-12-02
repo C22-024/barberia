@@ -108,6 +108,7 @@ class _SignInPageBody extends StatelessWidget {
             ),
             verticalSpace16,
             EmailFormField(
+              textInputAction: TextInputAction.next,
               onChanged: (email) => context
                   .read<SignInFormBloc>()
                   .add(SignInFormEvent.emailChanged(email)),
@@ -121,6 +122,7 @@ class _SignInPageBody extends StatelessWidget {
             verticalSpace8,
             PasswordFormField(
               hintText: 'Kata sandi',
+              textInputAction: TextInputAction.done,
               onChanged: (password) => context
                   .read<SignInFormBloc>()
                   .add(SignInFormEvent.passwordChanged(password)),

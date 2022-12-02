@@ -7,6 +7,7 @@ class EmailFormField extends StatelessWidget {
     this.controller,
     this.validator,
     this.autovalidateMode,
+    this.textInputAction,
     required this.onChanged,
   });
 
@@ -14,6 +15,7 @@ class EmailFormField extends StatelessWidget {
   final String? Function(String?)? validator;
   final ValueChanged<String> onChanged;
   final AutovalidateMode? autovalidateMode;
+  final TextInputAction? textInputAction;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class EmailFormField extends StatelessWidget {
         child: Icon(Icons.email_outlined),
       ),
       keyboardType: TextInputType.emailAddress,
+      textInputAction: textInputAction,
       controller: controller,
       validator: validator,
       onChanged: onChanged,
