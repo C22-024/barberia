@@ -85,7 +85,7 @@ class _SignUpPageBody extends StatelessWidget {
       autovalidateMode: errorMessagesShown
           ? AutovalidateMode.always
           : AutovalidateMode.disabled,
-      child: Padding(
+      child: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
