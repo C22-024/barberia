@@ -8,12 +8,14 @@ class PasswordFormField extends StatelessWidget {
     required this.onChanged,
     this.controller,
     this.validator,
+    this.textInputAction,
   });
 
   final String hintText;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final ValueChanged<String> onChanged;
+  final TextInputAction? textInputAction;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class PasswordFormField extends StatelessWidget {
       ),
       obscureText: true,
       keyboardType: TextInputType.visiblePassword,
+      textInputAction: textInputAction,
       onChanged: onChanged,
       validator: validator,
     );
