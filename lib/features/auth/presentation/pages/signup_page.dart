@@ -54,17 +54,24 @@ class SignUpPage extends StatelessWidget {
             child: Scaffold(
               appBar: BAppBar.defaultWithBackButton(context, 'Buat Akun Baru'),
               body: _SignUpPageBody(state.errorMessagesShown),
-              bottomSheet: Hero(
-                tag: 'button0',
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: BButton(
-                    label: 'Buat Akun',
-                    onPressed: () => context
-                        .read<SignUpFormBloc>()
-                        .add(const SignUpFormEvent.signUpButtonPressed()),
-                  ),
-                ),
+              bottomSheet: BlocBuilder<SignUpFormBloc, SignUpFormState>(
+                buildWhen: (previous, current) =>
+                    previous.isSubmitting != current.isSubmitting,
+                builder: (context, state) {
+                  return Hero(
+                    tag: 'button0',
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: BButton(
+                        label: 'Buat Akun',
+                        busy: state.isSubmitting,
+                        onPressed: () => context
+                            .read<SignUpFormBloc>()
+                            .add(const SignUpFormEvent.signUpButtonPressed()),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           );
