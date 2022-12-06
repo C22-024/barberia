@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 import 'common_widgets/placeholder_page.dart';
+import 'common_widgets/scaffold_with_navbar.dart';
 import 'features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'features/auth/presentation/pages/password_reset_page.dart';
 import 'features/auth/presentation/pages/profile_setup_page.dart';
@@ -28,12 +29,22 @@ final router = GoRouter(
     ),
     ShellRoute(
       navigatorKey: _shellNavigatorKey,
-      builder: (context, state, child) => const PlaceholderPage('Home Page'),
+      builder: (context, state, child) => ScaffoldWithNavBar(child: child),
       routes: [
         GoRoute(
           name: 'home',
           path: '/home',
           builder: (context, state) => const PlaceholderPage('Home'),
+        ),
+        GoRoute(
+          name: 'activities',
+          path: '/activities',
+          builder: (context, state) => const PlaceholderPage('Activities'),
+        ),
+        GoRoute(
+          name: 'profile',
+          path: '/profile',
+          builder: (context, state) => const PlaceholderPage('Profile'),
         ),
       ],
     ),
@@ -79,8 +90,10 @@ final router = GoRouter(
               redirectPath = '/home';
             }
 
-            // not in the redirect path
-            if (state.subloc != redirectPath) {
+            // in a setup pages
+            if (state.subloc == '/' ||
+                state.subloc.startsWith('/welcome') ||
+                state.subloc == '/profile-setup') {
               return redirectPath;
             }
 
