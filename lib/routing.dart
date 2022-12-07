@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 import 'common_widgets/placeholder_page.dart';
@@ -13,6 +12,8 @@ import 'features/auth/presentation/pages/signin_page.dart';
 import 'features/auth/presentation/pages/signup_page.dart';
 import 'features/auth/presentation/pages/splash_page.dart';
 import 'features/auth/presentation/pages/welcome_page.dart';
+import 'features/home/presentation/pages/home_page.dart';
+import 'features/home/presentation/pages/location_settings_page.dart';
 import 'injection.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'rootNav');
@@ -34,7 +35,18 @@ final router = GoRouter(
         GoRoute(
           name: 'home',
           path: '/home',
-          builder: (context, state) => const PlaceholderPage('Home'),
+          builder: (context, state) => const HomePage(),
+          routes: [
+            GoRoute(
+              parentNavigatorKey: _rootNavigatorKey,
+              name: 'location-settings',
+              path: 'location-settings',
+              pageBuilder: (context, state) => const MaterialPage(
+                fullscreenDialog: true,
+                child: LocationSettingsPage(),
+              ),
+            ),
+          ],
         ),
         GoRoute(
           name: 'activities',
@@ -87,7 +99,11 @@ final router = GoRouter(
             if (user.name == null) {
               redirectPath = '/profile-setup';
             } else {
-              redirectPath = '/home';
+              if (user.lastLocation == null) {
+                redirectPath = '/home/location-settings';
+              } else {
+                redirectPath = '/home';
+              }
             }
 
             // in a setup pages
