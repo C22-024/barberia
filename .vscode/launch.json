@@ -7,19 +7,31 @@
         {
             "name": "barberia",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "args": [
+                "--dart-define",
+                "TF_MAP_KEY=139e61969a5f49cf8718609f40ff6c10",
+            ],
         },
         {
             "name": "barberia (profile mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "profile",
+            "args": [
+                "--dart-define",
+                "TF_MAP_KEY=139e61969a5f49cf8718609f40ff6c10",
+            ],
         },
         {
             "name": "barberia (release mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "release",
+            "args": [
+                "--dart-define",
+                "TF_MAP_KEY=139e61969a5f49cf8718609f40ff6c10",
+            ],
         }
     ]
 }

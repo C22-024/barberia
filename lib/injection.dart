@@ -24,6 +24,14 @@ import 'features/auth/presentation/bloc/password_reset_form_bloc/password_reset_
 import 'features/auth/presentation/bloc/profile_setup_form_bloc/profile_setup_bloc.dart';
 import 'features/auth/presentation/bloc/signin_form_bloc/signin_form_bloc.dart';
 import 'features/auth/presentation/bloc/signup_form_bloc/signup_form_bloc.dart';
+import 'features/home/data/datasources/home_remote_data_source.dart';
+import 'features/home/data/repositories/home_repository_impl.dart';
+import 'features/home/domain/repositories/home_repository.dart';
+import 'features/home/domain/usecases/get_gps_location.dart';
+import 'features/home/domain/usecases/get_placemark_from_coordinates.dart';
+import 'features/home/domain/usecases/request_location_permission.dart';
+import 'features/home/domain/usecases/update_last_location.dart';
+import 'features/home/presentation/bloc/location_settings_bloc/location_settings_bloc.dart';
 
 final getIt = GetIt.instance;
 
@@ -38,6 +46,12 @@ void init() {
   getIt.registerFactory(() => SignUpFormBloc(getIt()));
   getIt.registerFactory(() => PasswordResetFormBloc(getIt()));
   getIt.registerFactory(() => ProfileSetupFormBloc(getIt(), getIt(), getIt()));
+  getIt.registerFactory(() => LocationSettingsBloc(
+        getIt(),
+        getIt(),
+        getIt(),
+        getIt(),
+      ));
 
   // usecase
   getIt.registerLazySingleton(() => GetSignedInUser(getIt()));
@@ -49,15 +63,23 @@ void init() {
   getIt.registerLazySingleton(() => CreateUserProfile(getIt()));
   getIt.registerLazySingleton(() => PickImage(getIt(), getIt()));
   getIt.registerLazySingleton(() => UploadProfilePicture(getIt()));
+  getIt.registerLazySingleton(() => UpdateLastLocation(getIt()));
+  getIt.registerLazySingleton(() => const RequestLocationPermission());
+  getIt.registerLazySingleton(() => const GetGPSLocation());
+  getIt.registerLazySingleton(() => const GetPlacemarkFromCoordinates());
 
   // repository
   getIt.registerLazySingleton<AuthFacade>(() => AuthFacadeImpl(getIt()));
   getIt
       .registerLazySingleton<UserRepository>(() => UserRepositoryImpl(getIt()));
+  getIt
+      .registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(getIt()));
 
   // data source
   getIt.registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl(getIt(), getIt()));
+  getIt.registerLazySingleton<HomeRemoteDataSource>(
+      () => HomeRemoteDataSourceImpl(getIt()));
 
   // external
   getIt.registerLazySingleton(() => FirebaseAuth.instance);
