@@ -45,5 +45,7 @@
 	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Pick an image for profile photo.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app needs access to location when settings user location.</string>
 </dict>
 </plist>
