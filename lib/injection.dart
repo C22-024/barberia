@@ -1,3 +1,8 @@
+import 'package:barberia/features/activities/data/datasources/appointment_remote_data_source.dart';
+import 'package:barberia/features/activities/data/repositories/appointment_repository_impl.dart';
+import 'package:barberia/features/activities/domain/repositories/appointment_repository.dart';
+import 'package:barberia/features/activities/domain/usecases/get_appointments.dart';
+import 'package:barberia/features/activities/presentation/bloc/appoinment_getter/appoinment_getter_bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -38,6 +43,7 @@ void init() {
   getIt.registerFactory(() => SignUpFormBloc(getIt()));
   getIt.registerFactory(() => PasswordResetFormBloc(getIt()));
   getIt.registerFactory(() => ProfileSetupFormBloc(getIt(), getIt(), getIt()));
+  getIt.registerFactory(() => AppoinmentGetterBloc(getIt()));
 
   // usecase
   getIt.registerLazySingleton(() => GetSignedInUser(getIt()));
@@ -49,15 +55,20 @@ void init() {
   getIt.registerLazySingleton(() => CreateUserProfile(getIt()));
   getIt.registerLazySingleton(() => PickImage(getIt(), getIt()));
   getIt.registerLazySingleton(() => UploadProfilePicture(getIt()));
+  getIt.registerLazySingleton(() => GetAppointments(getIt()));
 
   // repository
   getIt.registerLazySingleton<AuthFacade>(() => AuthFacadeImpl(getIt()));
   getIt
       .registerLazySingleton<UserRepository>(() => UserRepositoryImpl(getIt()));
+  getIt.registerLazySingleton<AppointmentRepository>(
+      () => AppointmentRepositoryImpl(getIt()));
 
   // data source
   getIt.registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl(getIt(), getIt()));
+  getIt.registerLazySingleton<AppointmentRemoteDataSource>(
+      () => AppointmentRemoteDataSourceImpl(getIt()));
 
   // external
   getIt.registerLazySingleton(() => FirebaseAuth.instance);
