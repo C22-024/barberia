@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:geoflutterfire2/geoflutterfire2.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -27,10 +28,13 @@ import 'features/auth/presentation/bloc/signup_form_bloc/signup_form_bloc.dart';
 import 'features/home/data/datasources/home_remote_data_source.dart';
 import 'features/home/data/repositories/home_repository_impl.dart';
 import 'features/home/domain/repositories/home_repository.dart';
+import 'features/home/domain/usecases/get_current_balance.dart';
 import 'features/home/domain/usecases/get_gps_location.dart';
+import 'features/home/domain/usecases/get_nearest_barbershops.dart';
 import 'features/home/domain/usecases/get_placemark_from_coordinates.dart';
 import 'features/home/domain/usecases/request_location_permission.dart';
 import 'features/home/domain/usecases/update_last_location.dart';
+import 'features/home/presentation/bloc/home_page_bloc/home_page_bloc.dart';
 import 'features/home/presentation/bloc/location_settings_bloc/location_settings_bloc.dart';
 
 final getIt = GetIt.instance;
@@ -52,6 +56,7 @@ void init() {
         getIt(),
         getIt(),
       ));
+  getIt.registerFactory(() => HomePageBloc(getIt(), getIt(), getIt()));
 
   // usecase
   getIt.registerLazySingleton(() => GetSignedInUser(getIt()));
@@ -67,6 +72,8 @@ void init() {
   getIt.registerLazySingleton(() => const RequestLocationPermission());
   getIt.registerLazySingleton(() => const GetGPSLocation());
   getIt.registerLazySingleton(() => const GetPlacemarkFromCoordinates());
+  getIt.registerLazySingleton(() => GetCurrentBalance(getIt()));
+  getIt.registerLazySingleton(() => GetNearestBarbershops(getIt()));
 
   // repository
   getIt.registerLazySingleton<AuthFacade>(() => AuthFacadeImpl(getIt()));
@@ -79,12 +86,13 @@ void init() {
   getIt.registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl(getIt(), getIt()));
   getIt.registerLazySingleton<HomeRemoteDataSource>(
-      () => HomeRemoteDataSourceImpl(getIt()));
+      () => HomeRemoteDataSourceImpl(getIt(), getIt()));
 
   // external
   getIt.registerLazySingleton(() => FirebaseAuth.instance);
   getIt.registerLazySingleton(() => FirebaseFirestore.instance);
   getIt.registerLazySingleton(() => FirebaseStorage.instance);
+  getIt.registerLazySingleton(() => GeoFlutterFire());
   getIt.registerLazySingleton(() => ImagePicker());
   getIt.registerLazySingleton(() => ImageCropper());
 }
