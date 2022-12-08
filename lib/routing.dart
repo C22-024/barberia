@@ -12,8 +12,10 @@ import 'features/auth/presentation/pages/signin_page.dart';
 import 'features/auth/presentation/pages/signup_page.dart';
 import 'features/auth/presentation/pages/splash_page.dart';
 import 'features/auth/presentation/pages/welcome_page.dart';
+import 'features/home/presentation/bloc/home_page_bloc/home_page_bloc.dart';
 import 'features/home/presentation/pages/home_page.dart';
 import 'features/home/presentation/pages/location_settings_page.dart';
+import 'features/home/presentation/pages/nearest_barbershops_overview_page.dart';
 import 'injection.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'rootNav');
@@ -44,6 +46,23 @@ final router = GoRouter(
               pageBuilder: (context, state) => const MaterialPage(
                 fullscreenDialog: true,
                 child: LocationSettingsPage(),
+              ),
+            ),
+            GoRoute(
+              parentNavigatorKey: _rootNavigatorKey,
+              name: 'search',
+              path: 'search',
+              pageBuilder: (context, state) => const MaterialPage(
+                fullscreenDialog: true,
+                child: PlaceholderPage('Search'),
+              ),
+            ),
+            GoRoute(
+              parentNavigatorKey: _rootNavigatorKey,
+              name: 'nearest-barbershops',
+              path: 'nearest-barbershops',
+              builder: (context, state) => NearestBarbershopsOverviewPage(
+                homePageBloc: state.extra as HomePageBloc,
               ),
             ),
           ],
@@ -89,6 +108,11 @@ final router = GoRouter(
           builder: (context, state) => const SignUpPage(),
         ),
       ],
+    ),
+    GoRoute(
+      name: 'barbershops',
+      path: '/barbershops/:id',
+      builder: (context, state) => PlaceholderPage('${state.params['id']}'),
     ),
   ],
   redirect: (_, state) async {
