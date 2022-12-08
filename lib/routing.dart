@@ -1,9 +1,8 @@
 import 'dart:async';
 
+import 'package:barberia/features/activities/presentation/pages/activities_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import 'package:barberia/features/activities/presentation/activities_page.dart';
 
 import 'common_widgets/placeholder_page.dart';
 import 'common_widgets/scaffold_with_navbar.dart';
