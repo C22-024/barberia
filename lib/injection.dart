@@ -6,6 +6,11 @@ import 'package:get_it/get_it.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'features/activities/data/datasources/appointment_remote_data_source.dart';
+import 'features/activities/data/repositories/appointment_repository_impl.dart';
+import 'features/activities/domain/repositories/appointment_repository.dart';
+import 'features/activities/domain/usecases/get_appointments.dart';
+import 'features/activities/presentation/bloc/appoinment_getter/appoinment_getter_bloc.dart';
 import 'features/auth/data/datasources/user_remote_data_source.dart';
 import 'features/auth/data/repositories/auth_facade_impl.dart';
 import 'features/auth/data/repositories/user_repository_impl.dart';
@@ -57,6 +62,7 @@ void init() {
   getIt.registerFactory(() => SignUpFormBloc(getIt()));
   getIt.registerFactory(() => PasswordResetFormBloc(getIt()));
   getIt.registerFactory(() => ProfileSetupFormBloc(getIt(), getIt(), getIt()));
+  getIt.registerFactory(() => AppoinmentGetterBloc(getIt()));
   getIt.registerFactory(() => LocationSettingsBloc(
         getIt(),
         getIt(),
@@ -76,6 +82,7 @@ void init() {
   getIt.registerLazySingleton(() => CreateUserProfile(getIt()));
   getIt.registerLazySingleton(() => PickImage(getIt(), getIt()));
   getIt.registerLazySingleton(() => UploadProfilePicture(getIt()));
+  getIt.registerLazySingleton(() => GetAppointments(getIt()));
   getIt.registerLazySingleton(() => UpdateLastLocation(getIt()));
   getIt.registerLazySingleton(() => const RequestLocationPermission());
   getIt.registerLazySingleton(() => const GetGPSLocation());
@@ -90,6 +97,8 @@ void init() {
   getIt.registerLazySingleton<AuthFacade>(() => AuthFacadeImpl(getIt()));
   getIt
       .registerLazySingleton<UserRepository>(() => UserRepositoryImpl(getIt()));
+  getIt.registerLazySingleton<AppointmentRepository>(
+      () => AppointmentRepositoryImpl(getIt()));
   getIt
       .registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(getIt()));
   getIt.registerLazySingleton<BarbershopRepository>(
@@ -99,6 +108,8 @@ void init() {
   // data source
   getIt.registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl(getIt(), getIt()));
+  getIt.registerLazySingleton<AppointmentRemoteDataSource>(
+      () => AppointmentRemoteDataSourceImpl(getIt()));
   getIt.registerLazySingleton<HomeRemoteDataSource>(
       () => HomeRemoteDataSourceImpl(getIt(), getIt()));
   getIt.registerLazySingleton<BarbershopRemoteDatasource>(
