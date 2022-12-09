@@ -1,9 +1,10 @@
-import 'package:barberia/features/activities/presentation/pages/process_page.dart';
 import 'package:barberia_ui/barberia_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import '../bloc/appoinment_getter/appoinment_getter_bloc.dart';
+import '../widgets/status_appointment_widget.dart';
 import 'activities_page.dart';
 
 class HistoryView extends StatelessWidget {
@@ -34,6 +35,8 @@ class HistoryView extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               itemCount: appointments.length,
               itemBuilder: (BuildContext context, int index) {
+                final date = DateTime.fromMillisecondsSinceEpoch(
+                    appointments[index].status['updatedAt']);
                 if (appointmentHistory
                     .contains(appointments[index].status['code'])) {
                   return BCard(
@@ -45,8 +48,8 @@ class HistoryView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
-                            margin: const EdgeInsets.only(right: 5),
-                            child: Image.asset('assets/images/barberia.png'),
+                            margin: const EdgeInsets.only(right: 10),
+                            child: Image.asset('assets/images/activities.png'),
                           ),
                           Expanded(
                             child: Column(
@@ -62,9 +65,8 @@ class HistoryView extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    BText.caption('16 Nov, 14:00'),
                                     BText.caption(
-                                        'Rp ${appointments[index].services![0]['price']}'),
+                                        timeago.format(date, locale: 'id')),
                                   ],
                                 )
                               ],

@@ -14,9 +14,11 @@ class ActivitiesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = getIt<AuthBloc>().state.whenOrNull(authenticated: (user) => user)!;
+    final user =
+        getIt<AuthBloc>().state.whenOrNull(authenticated: (user) => user)!;
     return BlocProvider(
-      create: (context) => getIt<AppoinmentGetterBloc>()..add(AppoinmentGetterEvent.getAllStarted(user.id)),
+      create: (context) => getIt<AppoinmentGetterBloc>()
+        ..add(AppoinmentGetterEvent.getAllStarted(user.id)),
       child: DefaultTabController(
         length: 2,
         child: Scaffold(
