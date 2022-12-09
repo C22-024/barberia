@@ -21,8 +21,7 @@ Future<void> main() async {
 
   init();
 
-  getIt<FirebaseFirestore>().settings =
-      const Settings(persistenceEnabled: false);
+  getIt<FirebaseFirestore>().settings = const Settings(persistenceEnabled: false);
 
   runApp(const MyApp());
 }
