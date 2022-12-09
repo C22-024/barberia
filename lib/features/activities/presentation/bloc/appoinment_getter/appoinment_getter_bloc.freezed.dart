@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AppoinmentGetterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getAllStarted,
+    required TResult Function(String userId) getAllStarted,
     required TResult Function(
             Either<Failure, List<Appointment>> failureOrAppointments)
         appointmentsReceived,
@@ -26,14 +26,14 @@ mixin _$AppoinmentGetterEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getAllStarted,
+    TResult? Function(String userId)? getAllStarted,
     TResult? Function(Either<Failure, List<Appointment>> failureOrAppointments)?
         appointmentsReceived,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getAllStarted,
+    TResult Function(String userId)? getAllStarted,
     TResult Function(Either<Failure, List<Appointment>> failureOrAppointments)?
         appointmentsReceived,
     required TResult orElse(),
@@ -84,6 +84,8 @@ abstract class _$$_GetAllStartedCopyWith<$Res> {
   factory _$$_GetAllStartedCopyWith(
           _$_GetAllStarted value, $Res Function(_$_GetAllStarted) then) =
       __$$_GetAllStartedCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String userId});
 }
 
 /// @nodoc
@@ -93,58 +95,82 @@ class __$$_GetAllStartedCopyWithImpl<$Res>
   __$$_GetAllStartedCopyWithImpl(
       _$_GetAllStarted _value, $Res Function(_$_GetAllStarted) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? userId = null,
+  }) {
+    return _then(_$_GetAllStarted(
+      null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_GetAllStarted implements _GetAllStarted {
-  const _$_GetAllStarted();
+  const _$_GetAllStarted(this.userId);
+
+  @override
+  final String userId;
 
   @override
   String toString() {
-    return 'AppoinmentGetterEvent.getAllStarted()';
+    return 'AppoinmentGetterEvent.getAllStarted(userId: $userId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_GetAllStarted);
+        (other.runtimeType == runtimeType &&
+            other is _$_GetAllStarted &&
+            (identical(other.userId, userId) || other.userId == userId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, userId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_GetAllStartedCopyWith<_$_GetAllStarted> get copyWith =>
+      __$$_GetAllStartedCopyWithImpl<_$_GetAllStarted>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getAllStarted,
+    required TResult Function(String userId) getAllStarted,
     required TResult Function(
             Either<Failure, List<Appointment>> failureOrAppointments)
         appointmentsReceived,
   }) {
-    return getAllStarted();
+    return getAllStarted(userId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getAllStarted,
+    TResult? Function(String userId)? getAllStarted,
     TResult? Function(Either<Failure, List<Appointment>> failureOrAppointments)?
         appointmentsReceived,
   }) {
-    return getAllStarted?.call();
+    return getAllStarted?.call(userId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getAllStarted,
+    TResult Function(String userId)? getAllStarted,
     TResult Function(Either<Failure, List<Appointment>> failureOrAppointments)?
         appointmentsReceived,
     required TResult orElse(),
   }) {
     if (getAllStarted != null) {
-      return getAllStarted();
+      return getAllStarted(userId);
     }
     return orElse();
   }
@@ -182,7 +208,12 @@ class _$_GetAllStarted implements _GetAllStarted {
 }
 
 abstract class _GetAllStarted implements AppoinmentGetterEvent {
-  const factory _GetAllStarted() = _$_GetAllStarted;
+  const factory _GetAllStarted(final String userId) = _$_GetAllStarted;
+
+  String get userId;
+  @JsonKey(ignore: true)
+  _$$_GetAllStartedCopyWith<_$_GetAllStarted> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -251,7 +282,7 @@ class _$_AppointmentsReceived implements _AppointmentsReceived {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getAllStarted,
+    required TResult Function(String userId) getAllStarted,
     required TResult Function(
             Either<Failure, List<Appointment>> failureOrAppointments)
         appointmentsReceived,
@@ -262,7 +293,7 @@ class _$_AppointmentsReceived implements _AppointmentsReceived {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getAllStarted,
+    TResult? Function(String userId)? getAllStarted,
     TResult? Function(Either<Failure, List<Appointment>> failureOrAppointments)?
         appointmentsReceived,
   }) {
@@ -272,7 +303,7 @@ class _$_AppointmentsReceived implements _AppointmentsReceived {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getAllStarted,
+    TResult Function(String userId)? getAllStarted,
     TResult Function(Either<Failure, List<Appointment>> failureOrAppointments)?
         appointmentsReceived,
     required TResult orElse(),
