@@ -1,6 +1,7 @@
-import 'package:barberia/features/activities/domain/entities/appointment.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../domain/entities/appointment.dart';
 
 part 'appointment_model.freezed.dart';
 part 'appointment_model.g.dart';
