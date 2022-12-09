@@ -13,6 +13,8 @@ import 'features/auth/presentation/pages/signin_page.dart';
 import 'features/auth/presentation/pages/signup_page.dart';
 import 'features/auth/presentation/pages/splash_page.dart';
 import 'features/auth/presentation/pages/welcome_page.dart';
+import 'features/profile/presentation/pages/edit_profile_page.dart';
+import 'features/profile/presentation/pages/profile_page.dart';
 import 'features/barbershop/presentation/pages/barbershop_page.dart';
 import 'features/home/presentation/bloc/home_page_bloc/home_page_bloc.dart';
 import 'features/home/presentation/pages/home_page.dart';
@@ -77,7 +79,21 @@ final router = GoRouter(
         GoRoute(
           name: 'profile',
           path: '/profile',
-          builder: (context, state) => const PlaceholderPage('Profile'),
+          builder: (context, state) => const ProfilePage(),
+          routes: [
+            GoRoute(
+              parentNavigatorKey: _rootNavigatorKey,
+              name: 'change-password',
+              path: 'change-password',
+              builder: (context, state) => const PasswordResetPage(),
+            ),
+            GoRoute(
+              parentNavigatorKey: _rootNavigatorKey,
+              name: 'edit-profile',
+              path: 'edit-profile',
+              builder: (context, state) => const EditProfilePage(),
+            ),
+          ],
         ),
       ],
     ),
@@ -96,6 +112,11 @@ final router = GoRouter(
           name: 'signin',
           path: 'signin',
           builder: (context, state) => const SignInPage(),
+        ),
+        GoRoute(
+          name: 'signup',
+          path: 'signup',
+          builder: (context, state) => const SignUpPage(),
           routes: [
             GoRoute(
               name: 'password-reset',
@@ -104,19 +125,13 @@ final router = GoRouter(
             ),
           ],
         ),
-        GoRoute(
-          name: 'signup',
-          path: 'signup',
-          builder: (context, state) => const SignUpPage(),
-        ),
       ],
     ),
     GoRoute(
       parentNavigatorKey: _rootNavigatorKey,
       name: 'barbershops',
       path: '/barbershops/:id',
-      builder: (context, state) =>
-          BarbershopPage(barbershopId: '${state.params['id']}'),
+      builder: (context, state) => BarbershopPage(barbershopId: '${state.params['id']}'),
     ),
   ],
   redirect: (_, state) async {
@@ -135,9 +150,7 @@ final router = GoRouter(
             }
 
             // in a setup pages
-            if (state.subloc == '/' ||
-                state.subloc.startsWith('/welcome') ||
-                state.subloc == '/profile-setup') {
+            if (state.subloc == '/' || state.subloc.startsWith('/welcome') || state.subloc == '/profile-setup') {
               return redirectPath;
             }
 
