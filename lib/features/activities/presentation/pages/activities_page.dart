@@ -1,3 +1,4 @@
+import 'package:barberia/common_widgets/spacing.dart';
 import 'package:barberia_ui/barberia_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,25 +14,22 @@ class ActivitiesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user =
-        getIt<AuthBloc>().state.whenOrNull(authenticated: (user) => user)!;
+    final user = getIt<AuthBloc>().state.whenOrNull(authenticated: (user) => user)!;
     return BlocProvider(
-      create: (context) => getIt<AppoinmentGetterBloc>()
-        ..add(AppoinmentGetterEvent.getAllStarted(user.id)),
+      create: (context) => getIt<AppoinmentGetterBloc>()..add(AppoinmentGetterEvent.getAllStarted(user.id)),
       child: DefaultTabController(
         length: 2,
         child: Scaffold(
           appBar: BAppBar(
-            centerTitle: false,
-            title: BText.titleLarge('Aktivitas'),
+            title: BText.titleSmall('Aktivitas'),
             bottom: TabBar(
               indicatorColor: BColors.primary,
               tabs: [
                 Tab(
-                  child: BText.titleMedium('Dalam Proses'),
+                  child: BText.titleSmall('Dalam Proses'),
                 ),
                 Tab(
-                  child: BText.titleMedium('Riwayat'),
+                  child: BText.titleSmall('Riwayat'),
                 ),
               ],
             ),
@@ -57,19 +55,31 @@ class EmptyView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          BText.titleLarge('Tidak Ada Riwayat Pemesanan!'),
-          BText.titleSmall(
-            'Coba pesan layanan yang disediakan oleh barbershop yang ada.',
-            maxLines: 2,
-            align: TextAlign.center,
-            emphasis: Emphasis.normal,
+          const Icon(
+            Icons.history_rounded,
+            size: 100,
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 30),
-            padding: const EdgeInsets.all(15),
+          verticalSpace16,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                BText.highlightMedium('Tidak Ada Riwayat Pemesanan!'),
+                verticalSpace4,
+                BText(
+                  'Coba pesan layanan yang disediakan oleh barbershop yang ada.',
+                  style: bodySmall,
+                  maxLines: 2,
+                  align: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16),
             child: BButton(
               label: 'Mulai memesan',
-              variant: BButtonVariant.positive,
+              variant: BButtonVariant.primary,
               onPressed: () {},
             ),
           )
