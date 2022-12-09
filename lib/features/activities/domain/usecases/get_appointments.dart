@@ -8,7 +8,7 @@ class GetAppointments {
 
   final AppointmentRepository _appointmentRepository;
 
-  Stream<Either<Failure, List<Appointment>>> execute() {
-    return _appointmentRepository.getAppointments();
+  Stream<Either<Failure, List<Appointment>>> execute(String userId) {
+    return _appointmentRepository.getAppointments(userId);
   }
 }
