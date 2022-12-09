@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:barberia/common_widgets/placeholder_page.dart';
+import 'package:barberia/features/review/domain/entities/appointment.dart';
 import 'package:barberia/features/booking/presentation/pages/booking_page.dart';
 import 'package:barberia/features/booking/presentation/pages/success_page.dart';
 import 'package:barberia/features/activities/domain/entities/appointment.dart';
@@ -8,7 +10,8 @@ import 'package:barberia/features/activities/presentation/pages/detail_progress_
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'common_widgets/placeholder_page.dart';
+import 'features/review/domain/entities/user.dart';
+import 'features/review/presentation/pages/add_review_page.dart';
 import 'common_widgets/scaffold_with_navbar.dart';
 import 'features/activities/presentation/pages/detail_history_page.dart';
 import 'features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
@@ -117,6 +120,31 @@ final router = GoRouter(
           ],
         ),
       ],
+    ),
+    GoRoute(
+      name: 'add-review',
+      path: '/add-review',
+      pageBuilder: (context, state) {
+        // return MaterialPage(
+        //   child: AddReviewPage(
+        //     appointment: state.extra as Appointment,
+        //   ),
+        //   fullscreenDialog: true,
+        // );
+        return const MaterialPage(
+          child: AddReviewPage(
+            appointment: Appointment(
+              id: 'b6Is8jvH2hAI26ZrWQj7',
+              barbershopId: 'barbershop_eu4SX8BFpONUt5TsHr8U',
+              barbershopName: 'Cepmek BB',
+              user:
+                  User(id: 'user_vMnxi6RSdXUMkzUkiaRlRgQIe2K2', name: 'Zafran'),
+              timestamp: 1670431166271,
+            ),
+          ),
+          fullscreenDialog: true,
+        );
+      },
     ),
     GoRoute(
       name: 'profile-setup',
