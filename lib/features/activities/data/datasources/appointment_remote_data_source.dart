@@ -4,7 +4,7 @@ import '../../../../utils/firebase_extensions.dart';
 import '../models/appointment_model.dart';
 
 abstract class AppointmentRemoteDataSource {
-  Stream<List<AppointmentModel>> getAppointments();
+  Stream<List<AppointmentModel>> getAppointments(String userId);
 }
 
 class AppointmentRemoteDataSourceImpl implements AppointmentRemoteDataSource {
@@ -13,10 +13,13 @@ class AppointmentRemoteDataSourceImpl implements AppointmentRemoteDataSource {
   final FirebaseFirestore _firestore;
 
   @override
-  Stream<List<AppointmentModel>> getAppointments() async* {
-    yield* _firestore.appointmentColRef.snapshots().map((event) => event.docs
-        .map((e) => AppointmentModel.fromFirestore(
-            e as DocumentSnapshot<Map<String, dynamic>>))
-        .toList());
+  Stream<List<AppointmentModel>> getAppointments(String userId) async* {
+    yield* _firestore.appointmentColRef
+        .where('user.id', isEqualTo: userId)
+        .snapshots()
+        .map((event) => event.docs
+            .map((e) => AppointmentModel.fromFirestore(
+                e as DocumentSnapshot<Map<String, dynamic>>))
+            .toList());
   }
 }
