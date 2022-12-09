@@ -1,4 +1,4 @@
-import 'package:barberia/constants/appointment_status_code.dart';
+import 'package:barberia/features/activities/presentation/pages/process_page.dart';
 import 'package:barberia_ui/barberia_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,10 +7,13 @@ import '../bloc/appoinment_getter/appoinment_getter_bloc.dart';
 import 'activities_page.dart';
 
 class HistoryView extends StatelessWidget {
-  final List<String> activities = <String>[
-    'Cepmek Barbershop',
-    'United Barbershop',
-    'Mini Barbershop',
+  final List<String> appointmentHistory = <String>[
+    'expired',
+    'rejected',
+    'autoCanceled',
+    'completed',
+    'canceledByUser',
+    'canceledByBarbershop',
   ];
 
   HistoryView({super.key});
@@ -31,44 +34,48 @@ class HistoryView extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               itemCount: appointments.length,
               itemBuilder: (BuildContext context, int index) {
-                return BCard(
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    margin: const EdgeInsets.only(right: 5),
-                    height: 100,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(right: 5),
-                          child: Image.asset('assets/images/barberia.png'),
-                        ),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              BText.titleSmall(
-                                appointments[index].barbershop['name'],
-                              ),
-                              BText.body(statusToBahasa[
-                                  appointments[index].status['code']]!),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  BText.caption('16 Nov, 14:00'),
-                                  BText.caption(
-                                      'Rp ${appointments[index].services![0]['price']}'),
-                                ],
-                              )
-                            ],
+                if (appointmentHistory
+                    .contains(appointments[index].status['code'])) {
+                  return BCard(
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.only(right: 5),
+                      height: 100,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(right: 5),
+                            child: Image.asset('assets/images/barberia.png'),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                BText.titleSmall(
+                                  appointments[index].barbershop['name'],
+                                ),
+                                StatusAppointment(
+                                    status: appointments[index].status['code']),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    BText.caption('16 Nov, 14:00'),
+                                    BText.caption(
+                                        'Rp ${appointments[index].services![0]['price']}'),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
+                  );
+                }
+                return Container();
               },
             );
           },
