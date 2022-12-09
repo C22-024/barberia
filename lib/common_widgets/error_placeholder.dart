@@ -18,8 +18,10 @@ class ErrorPlaceholder extends StatelessWidget {
             size: 64,
           ),
           verticalSpace8,
-          BText('Duh, ada kesalahan saat memuat data.',
-              style: bodyStyle.copyWith(color: BColors.negative))
+          BText(
+            'Duh, ada kesalahan saat memuat data.',
+            style: bodyStyle.copyWith(color: BColors.negative),
+          )
         ],
       ),
     );
