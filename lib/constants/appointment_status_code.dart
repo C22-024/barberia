@@ -1,3 +1,6 @@
+import 'package:barberia_ui/barberia_ui.dart';
+import 'package:flutter/material.dart';
+
 enum AppointmentStatusCode {
   waitingForPayment,
   paid,
@@ -30,3 +33,80 @@ const statusToBahasa = {
   'canceledByUser': 'Dibatalkan Oleh Pengguna',
   'canceledByBarbershop': 'Dibatalkan oleh Barber',
 };
+
+List<AppointmentStatusInfo> appointmentStatusInfoList = [
+  AppointmentStatusInfo(
+    statusCode: 'waitingForPayment',
+    bahasa: 'Menunggu Pembayaran',
+    backgroundColor: const Color(0xFFFFF8E1),
+    foregroundColor: Colors.red,
+  ),
+  AppointmentStatusInfo(
+    statusCode: 'paid',
+    bahasa: 'Dibayar',
+    backgroundColor: const Color(0xFFFFF8E1),
+    foregroundColor: Colors.red,
+  ),
+  AppointmentStatusInfo(
+    statusCode: 'expired',
+    bahasa: 'Kadaluarsa',
+    backgroundColor: BColors.neutral0,
+    foregroundColor: Colors.black,
+  ),
+  AppointmentStatusInfo(
+    statusCode: 'accepted',
+    bahasa: 'Diterima',
+    backgroundColor: const Color(0xFFC8E6C9),
+    foregroundColor: const Color(0xFF43A047),
+  ),
+  AppointmentStatusInfo(
+    statusCode: 'rejected',
+    bahasa: 'Ditolak',
+    backgroundColor: const Color(0xFFFFCDD2),
+    foregroundColor: const Color(0xFFE53935),
+  ),
+  AppointmentStatusInfo(
+    statusCode: 'autoCanceled',
+    bahasa: 'Dibatalkan Secara Otomatis',
+    backgroundColor: const Color(0xFFFFCDD2),
+    foregroundColor: const Color(0xFFE53935),
+  ),
+  AppointmentStatusInfo(
+    statusCode: 'ongoing',
+    bahasa: 'Sedang Berlangsung',
+    backgroundColor: const Color(0xFFC8E6C9),
+    foregroundColor: const Color(0xFFFFC107),
+  ),
+  AppointmentStatusInfo(
+    statusCode: 'completed',
+    bahasa: 'Selesai',
+    backgroundColor: const Color(0xFFC8E6C9),
+    foregroundColor: const Color(0xFFFFC107),
+  ),
+  AppointmentStatusInfo(
+    statusCode: 'canceledByUser',
+    bahasa: 'Dibatalkan Oleh Pengguna',
+    backgroundColor: const Color(0xFFFFCDD2),
+    foregroundColor: const Color(0xFFE53935),
+  ),
+  AppointmentStatusInfo(
+    statusCode: 'canceledByBarbershop',
+    bahasa: 'Dibatalkan oleh Barber',
+    backgroundColor: const Color(0xFFFFCDD2),
+    foregroundColor: const Color(0xFFE53935),
+  ),
+];
+
+class AppointmentStatusInfo {
+  AppointmentStatusInfo({
+    required this.statusCode,
+    required this.bahasa,
+    required this.backgroundColor,
+    required this.foregroundColor,
+  });
+
+  final String statusCode;
+  final String bahasa;
+  final Color backgroundColor;
+  final Color foregroundColor;
+}
