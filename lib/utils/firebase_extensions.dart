@@ -4,6 +4,7 @@ extension FirestoreX on FirebaseFirestore {
   CollectionReference get userColRef => collection('users');
   CollectionReference get pointBalanceColRef => collection('pointBalances');
   CollectionReference get barbershopColRef => collection('barbershops');
+  CollectionReference get appointmentColRef => collection('appointments');
   CollectionReference barbershopPostColRef(String barbershopId) =>
       barbershopDocRef(barbershopId).collection('posts');
   CollectionReference barbershopServiceColRef(String barbershopId) =>
