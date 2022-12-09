@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/appoinment_getter/appoinment_getter_bloc.dart';
 
 class ProcessView extends StatelessWidget {
-  final List<String> AppointmentOnProgress = <String>[
+  final List<String> appointmentOnProgress = <String>[
     'waitingForPayment',
     'paid',
     'accepted',
@@ -28,59 +28,54 @@ class ProcessView extends StatelessWidget {
             if (appointments.isEmpty) {
               return const EmptyView();
             }
-            if (AppointmentOnProgress.contains(
-                appointments[appointments.length - 1].status['code'])) {
-              return Container(
-                padding: const EdgeInsets.only(
-                    top: 10, bottom: 400, left: 15, right: 15),
-                child: BCard(
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    margin: const EdgeInsets.only(right: 5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(right: 5),
-                          child: Image.asset('assets/images/barberia.png'),
-                        ),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              BText.titleMedium(
-                                appointments[appointments.length - 1]
-                                    .barbershop['name'],
-                              ),
-                              Container(
-                                child: BText.body(
-                                  statusToBahasa[
-                                      appointments[appointments.length - 1]
-                                          .status['code']]!,
-                                ),
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  BText.caption('16 Nov, 14:00'),
-                                  BText.caption(
-                                    'Rp ${appointments[appointments.length - 1].services![0]['price']}',
-                                  ),
-                                ],
-                              )
-                            ],
+
+            return ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: appointments.length,
+              itemBuilder: (BuildContext context, int index) {
+                if (appointmentOnProgress
+                    .contains(appointments[index].status['code'])) {
+                  return BCard(
+                    child: Container(
+                      padding: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.only(right: 5),
+                      height: 100,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(right: 5),
+                            child: Image.asset('assets/images/barberia.png'),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                BText.titleSmall(
+                                  appointments[index].barbershop['name'],
+                                ),
+                                StatusAppointment(
+                                    status: appointments[index].status['code']),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    BText.caption('16 Nov, 14:00'),
+                                    BText.caption(
+                                        'Rp ${appointments[index].services![0]['price']}'),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ),
-              );
-            }
-            return Center(
-              child: BText.body('Anda sedang tidak memproses apapun'),
+                  );
+                }
+                return Container();
+              },
             );
           },
           orElse: () => const Center(
@@ -88,6 +83,39 @@ class ProcessView extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class StatusAppointment extends StatelessWidget {
+  const StatusAppointment({
+    Key? key,
+    required this.status,
+    this.style,
+    this.color,
+  }) : super(key: key);
+
+  final String status;
+  final TextStyle? style;
+  final Color? color;
+
+  @override
+  Widget build(BuildContext context) {
+    final AppointmentStatusInfo appointmentStatusInfo =
+        appointmentStatusInfoList.firstWhere((appointmentStatusInfo) =>
+            appointmentStatusInfo.statusCode == status);
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+      decoration: BoxDecoration(
+        color: color ?? appointmentStatusInfo.backgroundColor,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: BText(
+        appointmentStatusInfo.bahasa,
+        style: style ??
+            baseTextStyle.copyWith(
+                color: appointmentStatusInfo.foregroundColor),
+      ),
     );
   }
 }
