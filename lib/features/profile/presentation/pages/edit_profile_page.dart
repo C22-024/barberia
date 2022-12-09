@@ -18,10 +18,12 @@ class EditProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = getIt<AuthBloc>().state.whenOrNull(authenticated: (user) => user)!;
     return BlocProvider(
-      create: (context) => getIt<GetProfilePictureBloc>(),
+      create: (context) =>
+          getIt<GetProfilePictureBloc>()..add(GetProfilePictureEvent.photoProfileRequested(user.photoUrl)),
       child: BlocProvider(
-        create: (context) => getIt<EditProfileBloc>()..add(const EditProfileEvent.userProfileRequested()),
+        create: (context) => getIt<EditProfileBloc>()..add(EditProfileEvent.nameChanged(user.name!)),
         child: BlocListener<EditProfileBloc, EditProfileState>(
           listenWhen: (previous, current) => previous.failureOrSuccessOption != current.failureOrSuccessOption,
           listener: (context, state) {
@@ -56,18 +58,18 @@ class EditProfilePage extends StatelessWidget {
                   ),
                 ),
               ),
-              body: const _ProfileSetupPageBody(),
+              body: const _ProfileEditPageBody(),
               bottomSheet: BlocBuilder<EditProfileBloc, EditProfileState>(
                 buildWhen: (previous, current) => previous.isSubmitting != current.isSubmitting,
                 builder: (context, state) {
                   return Padding(
                     padding: const EdgeInsets.all(16),
                     child: BButton(
-                      label: 'Simpan',
-                      busy: state.isSubmitting,
-                      onPressed: () =>
-                          context.read<EditProfileBloc>().add(const EditProfileEvent.submitButtonPressed()),
-                    ),
+                        label: 'Simpan',
+                        busy: state.isSubmitting,
+                        onPressed: () {
+                          context.read<EditProfileBloc>().add(const EditProfileEvent.submitButtonPressed());
+                        }),
                   );
                 },
               ),
@@ -79,8 +81,8 @@ class EditProfilePage extends StatelessWidget {
   }
 }
 
-class _ProfileSetupPageBody extends StatelessWidget {
-  const _ProfileSetupPageBody();
+class _ProfileEditPageBody extends StatelessWidget {
+  const _ProfileEditPageBody();
 
   Widget _buildAvatar(
     BuildContext context,
@@ -89,27 +91,36 @@ class _ProfileSetupPageBody extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final radius = 0.25 * width;
 
-    final initialName = getIt<AuthBloc>().state.whenOrNull(authenticated: (user) => user.email.substring(0, 1));
+    final initialName = getIt<AuthBloc>().state.whenOrNull(authenticated: (user) => user.name!.substring(0, 1));
     return Padding(
       padding: EdgeInsets.only(top: ((width - (radius * 2)) / 4) - 16),
-      child: CircleAvatar(
-        backgroundColor: BColors.info,
-        foregroundImage: state.profilePictureOption.isSome()
-            ? FileImage(state.profilePictureOption.getOrElse(() => File('')))
-            : state.profilePictureRemote != null
-                ? MemoryImage(state.profilePictureRemote!) as ImageProvider
+      child: BlocBuilder<GetProfilePictureBloc, GetProfilePictureState>(
+        builder: (context, stateGetProfilePicture) {
+          return CircleAvatar(
+            backgroundColor: BColors.info,
+            foregroundImage: state.profilePictureOption.isSome()
+                ? FileImage(state.profilePictureOption.getOrElse(() => File('')))
+                : stateGetProfilePicture.whenOrNull(
+                    success: (profilePictureData) {
+                      if (profilePictureData == null) {
+                        return null;
+                      }
+                      return MemoryImage(profilePictureData);
+                    },
+                  ),
+            radius: radius,
+            child: state.profilePictureOption.isNone()
+                ? BText(
+                    initialName!,
+                    style: baseTextStyle.copyWith(
+                      fontSize: 50,
+                      fontWeight: FontWeight.w700,
+                      color: BColors.onInfo,
+                    ),
+                  )
                 : null,
-        radius: radius,
-        child: state.profilePictureOption.isNone()
-            ? BText(
-                initialName ?? 'B',
-                style: baseTextStyle.copyWith(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 0.5 * radius,
-                  color: BColors.onInfo,
-                ),
-              )
-            : null,
+          );
+        },
       ),
     );
   }
@@ -120,6 +131,8 @@ class _ProfileSetupPageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = getIt<AuthBloc>().state.whenOrNull(authenticated: (user) => user)!;
+    TextEditingController controllerName = TextEditingController(text: user.name);
     return SingleChildScrollView(
       padding: const EdgeInsets.all(16),
       child: Center(
@@ -151,7 +164,8 @@ class _ProfileSetupPageBody extends StatelessWidget {
               builder: (context, state) {
                 return BTextFormField(
                   autovalidateMode: state.errorMessagesShown ? AutovalidateMode.always : AutovalidateMode.disabled,
-                  hintText: state.name.fold((l) => 'Nama Kamu', (r) => r),
+                  controller: controllerName,
+                  hintText: 'Nama Kamu',
                   textAlign: TextAlign.center,
                   textCapitalization: TextCapitalization.words,
                   textInputAction: TextInputAction.done,
