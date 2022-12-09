@@ -1,5 +1,6 @@
-import 'package:barberia/constants/appointment_status_code.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../../../constants/appointment_status_code.dart';
 
 part 'status.freezed.dart';
 
