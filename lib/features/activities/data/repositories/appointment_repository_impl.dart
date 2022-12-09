@@ -12,9 +12,10 @@ class AppointmentRepositoryImpl extends AppointmentRepository {
   final AppointmentRemoteDataSource _appointmentRemoteDataSource;
 
   @override
-  Stream<Either<Failure, List<Appointment>>> getAppointments() async* {
+  Stream<Either<Failure, List<Appointment>>> getAppointments(
+      String userId) async* {
     yield* _appointmentRemoteDataSource
-        .getAppointments()
+        .getAppointments(userId)
         .map((appointmentModel) =>
             right<Failure, List<Appointment>>(appointmentModel
                 .map(

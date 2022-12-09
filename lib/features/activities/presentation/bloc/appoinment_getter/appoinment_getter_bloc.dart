@@ -23,17 +23,21 @@ class AppoinmentGetterBloc
       : super(const AppoinmentGetterState.initial()) {
     on<AppoinmentGetterEvent>((event, emit) async {
       await event.when(
-        getAllStarted: () => _handleGetAllStarted(emit),
+        getAllStarted: (userId) => _handleGetAllStarted(emit, userId),
         appointmentsReceived: (failureOrAppointments) =>
             _handleAppoinmentsReceived(emit, failureOrAppointments),
       );
     });
   }
 
-  Future<void> _handleGetAllStarted(Emitter<AppoinmentGetterState> emit) async {
+  Future<void> _handleGetAllStarted(
+    Emitter<AppoinmentGetterState> emit,
+    String userId,
+  ) async {
     emit(const AppoinmentGetterState.inProgress());
     _appointmentStreamSubscription?.cancel();
-    _appointmentStreamSubscription = getAppointments.execute().listen((event) {
+    _appointmentStreamSubscription =
+        getAppointments.execute(userId).listen((event) {
       add(AppoinmentGetterEvent.appointmentsReceived(event));
     });
   }
