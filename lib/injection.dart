@@ -1,3 +1,6 @@
+import 'package:barberia/features/review/data/datasources/review_remote_datasource.dart';
+import 'package:barberia/features/review/data/repositories/review_repository_impl.dart';
+import 'package:barberia/features/review/domain/usecases/add_review.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -63,6 +66,8 @@ import 'features/home/domain/usecases/request_location_permission.dart';
 import 'features/home/domain/usecases/update_last_location.dart';
 import 'features/home/presentation/bloc/home_page_bloc/home_page_bloc.dart';
 import 'features/home/presentation/bloc/location_settings_bloc/location_settings_bloc.dart';
+import 'features/review/domain/repositories/review_repository.dart';
+import 'features/review/presentation/bloc/review_form/review_form_bloc.dart';
 
 final getIt = GetIt.instance;
 
@@ -77,6 +82,7 @@ void init() {
   getIt.registerFactory(() => SignUpFormBloc(getIt()));
   getIt.registerFactory(() => PasswordResetFormBloc(getIt()));
   getIt.registerFactory(() => ProfileSetupFormBloc(getIt(), getIt(), getIt()));
+  getIt.registerFactory(() => ReviewFormBloc(getIt()));
   getIt.registerFactory(() => GetProfilePictureBloc(getIt()));
   getIt.registerFactory(() => EditProfileBloc(getIt(), getIt(), getIt()));
   getIt.registerFactory(() => AppoinmentGetterBloc(getIt()));
@@ -106,6 +112,7 @@ void init() {
   getIt.registerLazySingleton(() => CreateUserProfile(getIt()));
   getIt.registerLazySingleton(() => PickImage(getIt(), getIt()));
   getIt.registerLazySingleton(() => UploadProfilePicture(getIt()));
+  getIt.registerLazySingleton(() => AddReview(getIt()));
   getIt.registerLazySingleton(() => GetProfilePicture(getIt()));
   getIt.registerLazySingleton(() => UpdateUserProfile(getIt()));
   getIt.registerLazySingleton(() => GetAppointments(getIt()));
@@ -126,6 +133,8 @@ void init() {
   getIt.registerLazySingleton<AuthFacade>(() => AuthFacadeImpl(getIt()));
   getIt
       .registerLazySingleton<UserRepository>(() => UserRepositoryImpl(getIt()));
+  getIt.registerLazySingleton<ReviewRepository>(
+      () => ReviewRepositoryImpl(getIt()));
   getIt.registerLazySingleton<ProfileUserRepository>(
       () => ProfileUserRepositoryImpl(getIt()));
   getIt.registerLazySingleton<AppointmentRepository>(
@@ -142,6 +151,8 @@ void init() {
   // data source
   getIt.registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl(getIt(), getIt()));
+  getIt.registerLazySingleton<ReviewRemoteDatasource>(
+      () => ReviewRemoteDatasourceImpl(getIt()));
   getIt.registerLazySingleton<ProfileUserRemoteDataSource>(
       () => ProfileUserRemoteDataSourceImpl(getIt(), getIt()));
   getIt.registerLazySingleton<AppointmentRemoteDataSource>(
