@@ -3,8 +3,11 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../../constants/bpoin_transaction_status_code.dart';
 import '../../../../utils/firebase_extensions.dart';
 import '../models/appointment_model.dart';
+import '../models/bpoin_transaction_model.dart';
+import '../models/bpoin_transaction_status_model.dart';
 import '../models/transaction_token_model.dart';
 
 abstract class BookingRemoteDatasource {
@@ -31,6 +34,8 @@ class BookingRemoteDatasourceImpl implements BookingRemoteDatasource {
     final pointBalanceDocRef =
         _firestore.pointBalanceDocRef(appointment.user.id);
     final appointmentDocRef = _firestore.appointmentColRef.doc();
+    final pointHistoryDocRef =
+        _firestore.pointHistoryColRef(appointment.user.id).doc();
 
     await _firestore.runTransaction((transaction) async {
       if (appointment.paymentDetails.channels.isNotEmpty) {
@@ -41,9 +46,23 @@ class BookingRemoteDatasourceImpl implements BookingRemoteDatasource {
         if (currentBalance < payWithBPoinAmount) {
           throw Exception('Insufficient BPoin balance.');
         }
+
+        final timestamp = DateTime.now().millisecondsSinceEpoch;
+
+        final bpoinTransaction = BPoinTransactionModel(
+          status: BPoinTransactionStatusModel(
+            code: BPoinTransactionStatusCode.success,
+            updatedAt: timestamp,
+          ),
+          amount: payWithBPoinAmount,
+          timestamp: timestamp,
+          description: 'Pembayaran appointment ${appointment.id}',
+        );
+
         transaction.update(pointBalanceDocRef, {
           'currentBalance': FieldValue.increment(-payWithBPoinAmount),
         });
+        transaction.set(pointHistoryDocRef, bpoinTransaction.toJson());
       }
       transaction.set(appointmentDocRef, appointment.toJson());
     });
