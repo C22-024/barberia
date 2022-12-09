@@ -109,88 +109,95 @@ class __DetailPageState extends State<_DetailPage>
     return Scaffold(
       floatingActionButton: _FloatingBookButton(_scrollController),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: NestedScrollView(
-        controller: _scrollController,
-        headerSliverBuilder: (context, _) => [
-          SliverOverlapAbsorber(
-            handle: appBarHandle,
-            sliver: SliverAppBar(
-              expandedHeight: appBarHeight,
-              pinned: true,
-              elevation: 0,
-              backgroundColor: BColors.background,
-              leading: Center(
-                child: BIconButton.circle(
-                  onPressed: () => context.pop(),
-                  variant: BButtonVariant.bare,
-                  size: BWidgetSize.small,
-                  child: const Icon(Icons.arrow_back_ios_new),
+      body: RefreshIndicator(
+        onRefresh: () async {
+          context
+              .read<BarbershopBloc>()
+              .add(BarbershopEvent.initialized(barbershop.id));
+        },
+        child: NestedScrollView(
+          controller: _scrollController,
+          headerSliverBuilder: (context, _) => [
+            SliverOverlapAbsorber(
+              handle: appBarHandle,
+              sliver: SliverAppBar(
+                expandedHeight: appBarHeight,
+                pinned: true,
+                elevation: 0,
+                backgroundColor: BColors.background,
+                leading: Center(
+                  child: BIconButton.circle(
+                    onPressed: () => context.pop(),
+                    variant: BButtonVariant.bare,
+                    size: BWidgetSize.small,
+                    child: const Icon(Icons.arrow_back_ios_new),
+                  ),
                 ),
-              ),
-              flexibleSpace: FlexibleSpaceBar(
-                title: BText.titleSmall(barbershop.name),
-                titlePadding:
-                    const EdgeInsetsDirectional.only(start: 0, bottom: 56 + 16),
-                centerTitle: true,
-                background: Column(
-                  children: [
-                    Stack(
-                      alignment: Alignment.topCenter,
-                      children: [
-                        DecoratedBox(
-                          position: DecorationPosition.foreground,
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.bottomCenter,
-                              end: Alignment.topCenter,
-                              colors: [
-                                BColors.neutral1000,
-                                BColors.neutral1000t32,
-                              ],
+                flexibleSpace: FlexibleSpaceBar(
+                  title: BText.titleSmall(barbershop.name),
+                  titlePadding: const EdgeInsetsDirectional.only(
+                      start: 0, bottom: 56 + 16),
+                  centerTitle: true,
+                  background: Column(
+                    children: [
+                      Stack(
+                        alignment: Alignment.topCenter,
+                        children: [
+                          DecoratedBox(
+                            position: DecorationPosition.foreground,
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [
+                                  BColors.neutral1000,
+                                  BColors.neutral1000t32,
+                                ],
+                              ),
+                            ),
+                            child: _BannerPicture(
+                              barbershop.bannerUrl,
+                              appBarHeight +
+                                  MediaQuery.of(context).padding.top -
+                                  56,
                             ),
                           ),
-                          child: _BannerPicture(
-                            barbershop.bannerUrl,
-                            appBarHeight +
-                                MediaQuery.of(context).padding.top -
-                                56,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 56 + 16),
-                          child: CircleAvatar(
-                            radius: BWidgetSize.medium.value,
-                            backgroundColor: BColors.transparent,
-                            foregroundImage: _resolveProfilePictureProvider(
-                              barbershop.photoUrl,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 56 + 16),
+                            child: CircleAvatar(
+                              radius: BWidgetSize.medium.value,
+                              backgroundColor: BColors.transparent,
+                              foregroundImage: _resolveProfilePictureProvider(
+                                barbershop.photoUrl,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                bottom: PreferredSize(
+                  preferredSize: const Size.fromHeight(56),
+                  child: _InfoList(barbershop),
                 ),
               ),
-              bottom: PreferredSize(
-                preferredSize: const Size.fromHeight(56),
-                child: _InfoList(barbershop),
+            ),
+            SliverOverlapAbsorber(
+              handle: tabBarHandle,
+              sliver: SliverPersistentHeader(
+                pinned: true,
+                delegate: _PersistentTabBar(_tabController),
               ),
             ),
-          ),
-          SliverOverlapAbsorber(
-            handle: tabBarHandle,
-            sliver: SliverPersistentHeader(
-              pinned: true,
-              delegate: _PersistentTabBar(_tabController),
-            ),
-          ),
-        ],
-        body: TabBarView(
-          controller: _tabController,
-          children: [
-            _GalleryView(appBarHandle, tabBarHandle),
-            _ServicesView(appBarHandle, tabBarHandle),
           ],
+          body: TabBarView(
+            controller: _tabController,
+            children: [
+              _GalleryView(appBarHandle, tabBarHandle),
+              _ServicesView(appBarHandle, tabBarHandle),
+            ],
+          ),
         ),
       ),
     );
