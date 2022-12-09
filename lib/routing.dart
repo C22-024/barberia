@@ -12,6 +12,7 @@ import 'features/auth/presentation/pages/signin_page.dart';
 import 'features/auth/presentation/pages/signup_page.dart';
 import 'features/auth/presentation/pages/splash_page.dart';
 import 'features/auth/presentation/pages/welcome_page.dart';
+import 'features/barbershop/presentation/pages/barbershop_page.dart';
 import 'features/home/presentation/bloc/home_page_bloc/home_page_bloc.dart';
 import 'features/home/presentation/pages/home_page.dart';
 import 'features/home/presentation/pages/location_settings_page.dart';
@@ -110,9 +111,11 @@ final router = GoRouter(
       ],
     ),
     GoRoute(
+      parentNavigatorKey: _rootNavigatorKey,
       name: 'barbershops',
       path: '/barbershops/:id',
-      builder: (context, state) => PlaceholderPage('${state.params['id']}'),
+      builder: (context, state) =>
+          BarbershopPage(barbershopId: '${state.params['id']}'),
     ),
   ],
   redirect: (_, state) async {

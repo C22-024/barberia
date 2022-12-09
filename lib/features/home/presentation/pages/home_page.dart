@@ -1,6 +1,5 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:barberia/features/home/presentation/widgets/empty_nearest_barbershop_placeholder.dart';
-import 'package:barberia/features/home/presentation/widgets/error_placeholder.dart';
 import 'package:barberia_ui/barberia_ui.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../common_widgets/error_placeholder.dart';
 import '../../../../common_widgets/spacing.dart';
 import '../../../../injection.dart';
 import '../../domain/entitites/barbershop_overview.dart';
@@ -431,7 +431,7 @@ class _HorizontalListCard extends StatelessWidget {
                             size: 16,
                           ),
                           BText.caption(
-                            '${barbershop.rating} • ${barbershop.distance.toStringAsFixed(2)}km',
+                            '${barbershop.rating} • ${barbershop.distance.toStringAsFixed(2)} km',
                             emphasis: Emphasis.less,
                           ),
                         ],

@@ -25,6 +25,13 @@ import 'features/auth/presentation/bloc/password_reset_form_bloc/password_reset_
 import 'features/auth/presentation/bloc/profile_setup_form_bloc/profile_setup_bloc.dart';
 import 'features/auth/presentation/bloc/signin_form_bloc/signin_form_bloc.dart';
 import 'features/auth/presentation/bloc/signup_form_bloc/signup_form_bloc.dart';
+import 'features/barbershop/data/datasources/barbershop_remote_datasource.dart';
+import 'features/barbershop/data/repositories/barbershop_repository_impl.dart';
+import 'features/barbershop/domain/repositories/barbershop_repository.dart';
+import 'features/barbershop/domain/usecases/get_barbershop.dart';
+import 'features/barbershop/domain/usecases/get_barbershop_posts.dart';
+import 'features/barbershop/domain/usecases/get_barbershop_services.dart';
+import 'features/barbershop/presentation/bloc/barbershop/barbershop_bloc.dart';
 import 'features/home/data/datasources/home_remote_data_source.dart';
 import 'features/home/data/repositories/home_repository_impl.dart';
 import 'features/home/domain/repositories/home_repository.dart';
@@ -57,6 +64,7 @@ void init() {
         getIt(),
       ));
   getIt.registerFactory(() => HomePageBloc(getIt(), getIt(), getIt()));
+  getIt.registerFactory(() => BarbershopBloc(getIt(), getIt(), getIt()));
 
   // usecase
   getIt.registerLazySingleton(() => GetSignedInUser(getIt()));
@@ -74,6 +82,9 @@ void init() {
   getIt.registerLazySingleton(() => const GetPlacemarkFromCoordinates());
   getIt.registerLazySingleton(() => GetCurrentBalance(getIt()));
   getIt.registerLazySingleton(() => GetNearestBarbershops(getIt()));
+  getIt.registerLazySingleton(() => GetBarbershop(getIt()));
+  getIt.registerLazySingleton(() => GetBarbershopPosts(getIt()));
+  getIt.registerLazySingleton(() => GetBarbershopServices(getIt()));
 
   // repository
   getIt.registerLazySingleton<AuthFacade>(() => AuthFacadeImpl(getIt()));
@@ -81,12 +92,17 @@ void init() {
       .registerLazySingleton<UserRepository>(() => UserRepositoryImpl(getIt()));
   getIt
       .registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(getIt()));
+  getIt.registerLazySingleton<BarbershopRepository>(
+    () => BarbershopRepositoryImpl(getIt()),
+  );
 
   // data source
   getIt.registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl(getIt(), getIt()));
   getIt.registerLazySingleton<HomeRemoteDataSource>(
       () => HomeRemoteDataSourceImpl(getIt(), getIt()));
+  getIt.registerLazySingleton<BarbershopRemoteDatasource>(
+      () => BarbershopRemoteDatasourceImpl(getIt()));
 
   // external
   getIt.registerLazySingleton(() => FirebaseAuth.instance);

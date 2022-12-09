@@ -1,12 +1,13 @@
+import 'package:barberia/common_widgets/loading_placeholder.dart';
 import 'package:barberia_ui/barberia_ui.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../common_widgets/error_placeholder.dart';
 import '../bloc/home_page_bloc/home_page_bloc.dart';
 import '../widgets/empty_nearest_barbershop_placeholder.dart';
-import '../widgets/error_placeholder.dart';
 
 class NearestBarbershopsOverviewPage extends StatelessWidget {
   const NearestBarbershopsOverviewPage({super.key, required this.homePageBloc});
@@ -80,7 +81,7 @@ class NearestBarbershopsOverviewPage extends StatelessWidget {
                 );
               },
               loadFailure: (_) => const ErrorPlaceholder(),
-              orElse: () => const Center(child: CircularProgressIndicator()),
+              orElse: () => const LoadingPlaceholder(),
             );
           },
         ),
