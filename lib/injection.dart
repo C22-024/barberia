@@ -70,7 +70,7 @@ void init() {
   getIt.registerFactory(() => PasswordResetFormBloc(getIt()));
   getIt.registerFactory(() => ProfileSetupFormBloc(getIt(), getIt(), getIt()));
   getIt.registerFactory(() => GetProfilePictureBloc(getIt()));
-  getIt.registerFactory(() => EditProfileBloc(getIt(), getIt(), getIt(), getIt()));
+  getIt.registerFactory(() => EditProfileBloc(getIt(), getIt(), getIt()));
   getIt.registerFactory(() => AppoinmentGetterBloc(getIt()));
   getIt.registerFactory(() => LocationSettingsBloc(
         getIt(),
