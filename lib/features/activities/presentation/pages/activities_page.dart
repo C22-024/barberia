@@ -23,7 +23,7 @@ class ActivitiesPage extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: BAppBar(
-            title: BText.titleSmall('Aktivitas'),
+            title: BText.titleMedium('Aktivitas'),
             bottom: TabBar(
               indicatorColor: BColors.primary,
               tabs: [
@@ -49,7 +49,19 @@ class ActivitiesPage extends StatelessWidget {
 }
 
 class EmptyView extends StatelessWidget {
-  const EmptyView({super.key});
+  const EmptyView({
+    super.key,
+    this.iconData = Icons.history_rounded,
+    this.title = 'Tidak Ada Riwayat Pemesanan!',
+    this.subtitle =
+        'Coba pesan layanan yang disediakan oleh barbershop yang ada.',
+    this.child,
+  });
+
+  final IconData iconData;
+  final String title;
+  final String subtitle;
+  final Widget? child;
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +69,8 @@ class EmptyView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
-            Icons.history_rounded,
+          Icon(
+            iconData,
             size: 100,
           ),
           verticalSpace16,
@@ -66,10 +78,10 @@ class EmptyView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
-                BText.highlightMedium('Tidak Ada Riwayat Pemesanan!'),
+                BText.highlightMedium(title),
                 verticalSpace4,
                 BText(
-                  'Coba pesan layanan yang disediakan oleh barbershop yang ada.',
+                  subtitle,
                   style: bodySmall,
                   maxLines: 2,
                   align: TextAlign.center,
@@ -79,11 +91,12 @@ class EmptyView extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(16),
-            child: BButton(
-              label: 'Mulai memesan',
-              variant: BButtonVariant.primary,
-              onPressed: () {},
-            ),
+            child: child ??
+                BButton(
+                  label: 'Mulai memesan',
+                  variant: BButtonVariant.primary,
+                  onPressed: () {},
+                ),
           )
         ],
       ),
