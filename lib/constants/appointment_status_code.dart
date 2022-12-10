@@ -113,12 +113,12 @@ class AppointmentStatusInfo {
 
 class AppointmentReview {
   AppointmentReview({
-    required this.name,
+    required this.user,
     required this.rate,
     required this.content,
   });
 
-  final String name;
+  final String user;
   final double rate;
   final String content;
 }

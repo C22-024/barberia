@@ -7,22 +7,24 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 class ReviewListPage extends StatelessWidget {
   final List<AppointmentReview> appointmentReview = [
     AppointmentReview(
-      name: 'One Barbershop',
+      user: 'Mas kukuh',
       rate: 4,
       content: 'Mantap...\nRecomended gan...\nCocok untuk segala usia...',
     ),
     AppointmentReview(
-      name: 'Two Barbershop',
+      user: 'Mas Kevin',
       rate: 5,
       content:
           'Tempat yang bagus untuk memotong rambut Anda, Anda juga akan mendapatkan pijat dan minuman gratis .... bagus.',
     ),
     AppointmentReview(
-      name: 'Three Barbershop',
+      user: 'Mas Zafran',
       rate: 3,
       content: 'Pelayanan nya memuaskan',
     ),
   ];
+
+  final String barbershopName = 'United Barbershop';
 
   ReviewListPage({super.key});
 
@@ -30,7 +32,7 @@ class ReviewListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BAppBar(
-        title: BText.titleLarge('Daftar Review'),
+        title: BText.titleMedium('Daftar Review ${barbershopName}'),
       ),
       body: SafeArea(
         child: ListView.builder(
@@ -49,7 +51,7 @@ class ReviewListPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      BText.titleMedium(appointmentReview[index].name),
+                      BText.titleMedium(appointmentReview[index].user),
                       Padding(
                         padding: const EdgeInsets.only(top: 5.0),
                         child: RatingBarIndicator(
