@@ -1003,6 +1003,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.1"
+<<<<<<< HEAD
   url_launcher:
     dependency: "direct main"
     description:
@@ -1059,6 +1060,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
+=======
+>>>>>>> 1e0e6f8 (chore(profile): fix `ProfilePage` menu & route)
   uuid:
     dependency: transitive
     description:
