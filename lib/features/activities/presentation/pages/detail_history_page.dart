@@ -4,10 +4,10 @@ import 'package:barberia_ui/barberia_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class DetailActivitiesPage extends StatelessWidget {
+class DetailHistoryPage extends StatelessWidget {
   final Appointment appointment;
 
-  const DetailActivitiesPage({super.key, required this.appointment});
+  const DetailHistoryPage({super.key, required this.appointment});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,9 @@ class DetailActivitiesPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               RatingBarIndicator(
-                                rating: appointment.review!['rate'].toDouble(),
+                                rating: appointment.review == null
+                                    ? 0
+                                    : appointment.review!['rate'].toDouble(),
                                 itemCount: 5,
                                 itemBuilder: (context, index) => const Icon(
                                   Icons.star_rounded,
@@ -55,7 +57,7 @@ class DetailActivitiesPage extends StatelessWidget {
                           ),
                           Center(
                             child: BCard(
-                              margin: EdgeInsets.all(5),
+                              margin: const EdgeInsets.all(5),
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 8.0, vertical: 5),
@@ -63,7 +65,9 @@ class DetailActivitiesPage extends StatelessWidget {
                                   children: [
                                     BText.caption('Review anda :'),
                                     BText.caption(
-                                      appointment.review!['content'],
+                                      appointment.review == null
+                                          ? 'belum direview'
+                                          : appointment.review!['content'],
                                     ),
                                   ],
                                 ),
@@ -212,7 +216,7 @@ class DetailActivitiesPage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: BButton(
                 variant: BButtonVariant.positive,
-                label: 'Tambah Review',
+                label: 'Tambahkan Review',
                 onPressed: () {},
               ),
             )
