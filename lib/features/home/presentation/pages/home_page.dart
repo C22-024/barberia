@@ -19,8 +19,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          getIt<HomePageBloc>()..add(const HomePageEvent.initialized()),
+      create: (context) => getIt<HomePageBloc>()..add(const HomePageEvent.initialized()),
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
@@ -163,13 +162,11 @@ class _BPointCard extends StatelessWidget {
                     ],
                   ),
                   BlocBuilder<HomePageBloc, HomePageState>(
-                    buildWhen: (p, c) =>
-                        p.currentBalanceState != c.currentBalanceState,
+                    buildWhen: (p, c) => p.currentBalanceState != c.currentBalanceState,
                     builder: (context, state) {
                       return BText(
                         state.currentBalanceState.maybeWhen(
-                          loadSuccess: (currentBalance) =>
-                              NumberFormat.currency(
+                          loadSuccess: (currentBalance) => NumberFormat.currency(
                             locale: 'id_ID',
                             decimalDigits: 0,
                             symbol: '',
@@ -195,10 +192,9 @@ class _BPointCard extends StatelessWidget {
                 children: [
                   _VerticalButton(
                     label: 'Riwayat',
-                    iconData: Icons.history_edu,
+                    iconData: Icons.history_edu_rounded,
                     onTap: () {
-                      FlushbarHelper.createInformation(message: 'Coming soon.')
-                          .show(context);
+                      FlushbarHelper.createInformation(message: 'Coming soon.').show(context);
                     },
                   ),
                   _VerticalButton(
@@ -209,8 +205,7 @@ class _BPointCard extends StatelessWidget {
                       context: context,
                       backgroundColor: BColors.surface,
                       shape: const RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(8)),
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
                       ),
                       builder: (context) => const _BPoinInfoModalBottomSheet(),
                     ),
@@ -297,8 +292,7 @@ class _NearestBarbershopOverviewList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomePageBloc, HomePageState>(
-      buildWhen: (p, c) =>
-          p.nearestBarbershopsState != c.nearestBarbershopsState,
+      buildWhen: (p, c) => p.nearestBarbershopsState != c.nearestBarbershopsState,
       builder: (context, state) {
         return state.nearestBarbershopsState.maybeWhen(
           loadSuccess: (barbershops) {
@@ -317,8 +311,7 @@ class _NearestBarbershopOverviewList extends StatelessWidget {
                       barbershop: barbershops[index],
                       buttonLabel: 'Lihat detail',
                       onPressed: () {
-                        context.pushNamed('barbershops',
-                            params: {'id': barbershops[index].id});
+                        context.pushNamed('barbershops', params: {'id': barbershops[index].id});
                       },
                     ),
                     horizontalSpace8,
@@ -479,8 +472,7 @@ class _BarbershopPicture extends StatelessWidget {
       width: width,
       height: height,
       fit: BoxFit.cover,
-      placeholder: (context, url) =>
-          const Center(child: CircularProgressIndicator()),
+      placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
     );
   }
 }
