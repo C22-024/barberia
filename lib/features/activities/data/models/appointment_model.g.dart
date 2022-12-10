@@ -15,7 +15,7 @@ _$_AppointmentModel _$$_AppointmentModelFromJson(Map<String, dynamic> json) =>
           ?.map((e) => e as Map<String, dynamic>)
           .toList(),
       userDefinedExpiry: json['userDefinedExpiry'] as int?,
-      timeStamp: json['timeStamp'] as int?,
+      timestamp: json['timestamp'] as int?,
       paymentDetails: json['paymentDetails'] as Map<String, dynamic>?,
       review: json['review'] as Map<String, dynamic>?,
     );
@@ -27,7 +27,7 @@ Map<String, dynamic> _$$_AppointmentModelToJson(_$_AppointmentModel instance) =>
       'barbershop': instance.barbershop,
       'services': instance.services,
       'userDefinedExpiry': instance.userDefinedExpiry,
-      'timeStamp': instance.timeStamp,
+      'timestamp': instance.timestamp,
       'paymentDetails': instance.paymentDetails,
       'review': instance.review,
     };

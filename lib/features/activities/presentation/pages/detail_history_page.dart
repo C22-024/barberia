@@ -1,8 +1,12 @@
 import 'package:barberia/features/activities/domain/entities/appointment.dart';
 import 'package:barberia/features/activities/presentation/widgets/status_appointment_widget.dart';
+import 'package:barberia/features/review/domain/entities/appointment.dart'
+    as review;
+import 'package:barberia/features/review/domain/entities/user.dart';
 import 'package:barberia_ui/barberia_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 
 class DetailHistoryPage extends StatelessWidget {
   final Appointment appointment;
@@ -217,9 +221,19 @@ class DetailHistoryPage extends StatelessWidget {
               child: BButton(
                 variant: BButtonVariant.positive,
                 label: 'Tambahkan Review',
-                onPressed: () {},
+                onPressed: () => context.pushNamed('add-review',
+                    extra: review.Appointment(
+                      id: appointment.id,
+                      barbershopId: appointment.id,
+                      barbershopName: appointment.barbershop['name'],
+                      user: User(
+                        id: appointment.user['id'],
+                        name: appointment.user['name'],
+                      ),
+                      timestamp: appointment.timeStamp!,
+                    )),
               ),
-            )
+            ),
           ],
         ),
       ),
