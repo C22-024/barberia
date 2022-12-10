@@ -16,9 +16,7 @@ class ReviewRepositoryImpl implements ReviewRepository {
     try {
       await _datasource.addReview(ReviewModel.fromDomain(review));
       return right(unit);
-    } catch (e, s) {
-      print(e);
-      print(s);
+    } catch (e) {
       return left(Failure.unexpected(e.toString()));
     }
   }
