@@ -61,6 +61,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                   verticalSpace8,
                   ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return profileMenuList[index];
