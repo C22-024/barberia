@@ -33,23 +33,28 @@ class ActivityItemCard extends StatelessWidget {
             children: [
               Container(
                 margin: const EdgeInsets.only(right: 10),
-                child: Image.asset('assets/images/activities.png'),
+                child: Icon(
+                  Icons.cut_rounded,
+                  size: 60,
+                ),
               ),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    BText.titleSmall(
-                      appointment.barbershop['name'],
-                    ),
-                    StatusAppointment(status: appointment.status['code']),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        BText.titleSmall(
+                          appointment.barbershop['name'],
+                        ),
                         BText.caption(timeago.format(date, locale: 'id')),
                       ],
-                    )
+                    ),
+                    StatusAppointment(status: appointment.status['code']),
+                    BText.body(
+                        'Rp. ${appointment.services![0]['price'].toString()}')
                   ],
                 ),
               ),
