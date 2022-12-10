@@ -1,4 +1,5 @@
 import 'package:another_flushbar/flushbar_helper.dart';
+import 'package:barberia/constants/env.dart';
 import 'package:barberia_ui/barberia_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -185,11 +186,9 @@ class _Body extends StatelessWidget {
               urlTemplate:
                   'https://{s}.tile.thunderforest.com/{style}/{z}/{x}/{y}{r}.png?apikey={apiKey}',
               subdomains: const ['a', 'b', 'c'],
-              additionalOptions: {
+              additionalOptions: const {
                 'style': 'atlas',
-                'apiKey': const bool.hasEnvironment('TF_MAP_KEY')
-                    ? const String.fromEnvironment('TF_MAP_KEY')
-                    : throw AssertionError('TF_MAP_KEY is not set.'),
+                'apiKey': Env.TF_MAP_KEY,
               },
               maxZoom: 22,
               userAgentPackageName: 'id.barberia',

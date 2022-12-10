@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:barberia/constants/env.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,6 +15,7 @@ abstract class BookingRemoteDatasource {
   Future<TransactionTokenModel> getTransactionToken(
       AppointmentModel appointment);
   Future<void> createAppointment(AppointmentModel appointment);
+  Future<int> getBPoinBalance(String userId);
 }
 
 class BookingRemoteDatasourceImpl implements BookingRemoteDatasource {
@@ -33,7 +35,7 @@ class BookingRemoteDatasourceImpl implements BookingRemoteDatasource {
   Future<void> createAppointment(AppointmentModel appointment) async {
     final pointBalanceDocRef =
         _firestore.pointBalanceDocRef(appointment.user.id);
-    final appointmentDocRef = _firestore.appointmentColRef.doc();
+    final appointmentDocRef = _firestore.appointmentColRef.doc(appointment.id);
     final pointHistoryDocRef =
         _firestore.pointHistoryColRef(appointment.user.id).doc();
 
@@ -76,7 +78,7 @@ class BookingRemoteDatasourceImpl implements BookingRemoteDatasource {
     final headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': 'Basic ${const String.fromEnvironment('AUTH_STRING')}',
+      'Authorization': 'Basic ${Env.AUTH_STRING}',
     };
     final grossAmount = calculateGrossAmount(appointment);
     final itemDetails = appointment.paymentDetails.details
@@ -98,13 +100,21 @@ class BookingRemoteDatasourceImpl implements BookingRemoteDatasource {
       'item_details': itemDetails,
     };
 
-    final response = await http.post(url, headers: headers, body: body);
+    final response =
+        await http.post(url, headers: headers, body: jsonEncode(body));
 
     if (response.statusCode != 201) {
-      throw Exception('Status Code: ${response.statusCode}');
+      throw Exception(
+          'Status Code: ${response.statusCode}. Message: ${response.body}');
     }
 
     final decoded = jsonDecode(response.body) as Map<String, dynamic>;
     return TransactionTokenModel.fromJson(decoded);
+  }
+
+  @override
+  Future<int> getBPoinBalance(String userId) async {
+    final snapshot = await _firestore.pointBalanceDocRef(userId).get();
+    return (snapshot.data() as Map<String, dynamic>?)!['currentBalance'];
   }
 }

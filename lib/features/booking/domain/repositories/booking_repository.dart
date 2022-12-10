@@ -9,4 +9,5 @@ abstract class BookingRepository {
     Appointment appointment,
   );
   Future<Either<Failure, Unit>> createAppointment(Appointment appointment);
+  Future<Either<Failure, int>> getBPoinBalance(String userId);
 }

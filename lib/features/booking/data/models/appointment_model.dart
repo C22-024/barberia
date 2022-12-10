@@ -14,7 +14,7 @@ part 'appointment_model.g.dart';
 @freezed
 class AppointmentModel with _$AppointmentModel {
   const factory AppointmentModel({
-    required String id,
+    @JsonKey(ignore: true) String? id,
     required AppointmentStatusModel status,
     required AppointmentUserModel user,
     required AppointmentBarbershopModel barbershop,

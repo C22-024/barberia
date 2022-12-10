@@ -1,5 +1,6 @@
-import 'package:barberia/features/booking/domain/entities/transaction_token.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+import '../../domain/entities/transaction_token.dart';
 
 part 'transaction_token_model.freezed.dart';
 part 'transaction_token_model.g.dart';
@@ -8,7 +9,7 @@ part 'transaction_token_model.g.dart';
 class TransactionTokenModel with _$TransactionTokenModel {
   const factory TransactionTokenModel({
     required String token,
-    required String redirectUrl,
+    @JsonKey(name: 'redirect_url') required String redirectUrl,
   }) = _TransactionTokenModel;
 
   const TransactionTokenModel._();
