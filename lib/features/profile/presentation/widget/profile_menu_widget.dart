@@ -8,21 +8,28 @@ class ProfileMenuWidget extends StatelessWidget {
     super.key,
     required this.title,
     this.icon = Icons.question_mark_rounded,
-    this.goNamed = '/',
+    this.onTap,
+    this.goNamed,
     this.isCommingSoon = false,
   });
 
   final String title;
   final IconData icon;
-  final String goNamed;
+  final String? goNamed;
+  final VoidCallback? onTap;
   final bool isCommingSoon;
 
   @override
   Widget build(BuildContext context) {
     return BListTile(
-      onTap: () => isCommingSoon
-          ? FlushbarHelper.createInformation(message: 'Coming soon.').show(context)
-          : context.goNamed(goNamed),
+      onTap: onTap ??
+          () {
+            if (isCommingSoon) {
+              FlushbarHelper.createInformation(message: 'Coming soon.').show(context);
+            } else if (goNamed != null) {
+              context.goNamed(goNamed!);
+            }
+          },
       padding: const EdgeInsets.symmetric(
         horizontal: 16,
         vertical: 5,

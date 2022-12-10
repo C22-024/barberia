@@ -2,6 +2,8 @@ import 'package:barberia_ui/barberia_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../common_widgets/spacing.dart';
 import '../../../../injection.dart';
@@ -114,11 +116,15 @@ final profileMenuList = [
     goNamed: 'favorit',
     isCommingSoon: true,
   ),
-  const ProfileMenuWidget(
+  ProfileMenuWidget(
     title: 'Ajak teman pakai barbaria',
     icon: Icons.people_alt_rounded,
-    goNamed: 'share',
-    isCommingSoon: true,
+    onTap: () async {
+      await Share.share(
+        'Ayo cari barbershop menggunakan Barberia, cepat, sederhana, dan aman untuk mencari tempat potong rambut terdekat. Dapatkan di https://github.com/C22-024',
+        subject: 'Berbagi Aplikasi Barberia',
+      );
+    },
   ),
   const ProfileMenuWidget(
     title: 'Notifikasi',
@@ -132,10 +138,14 @@ final profileMenuList = [
     goNamed: 'account',
     isCommingSoon: true,
   ),
-  const ProfileMenuWidget(
+  ProfileMenuWidget(
     title: 'Bantuan & laporan',
     icon: Icons.help_outline_rounded,
-    goNamed: 'support',
-    isCommingSoon: true,
+    onTap: () async {
+      final Uri url = Uri.parse('https://github.com/C22-024');
+      if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+        throw 'Could not launch $url';
+      }
+    },
   ),
 ];
