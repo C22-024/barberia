@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:barberia/features/activities/domain/entities/appointment.dart';
 import 'package:barberia/features/activities/presentation/pages/activities_page.dart';
+import 'package:barberia/features/activities/presentation/pages/detail_activities_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -75,6 +77,15 @@ final router = GoRouter(
           name: 'activities',
           path: '/activities',
           builder: (context, state) => const ActivitiesPage(),
+          routes: [
+            GoRoute(
+              name: 'detail-activity',
+              path: 'detail-activity',
+              builder: ((context, state) => DetailActivitiesPage(
+                    appointment: state.extra as Appointment,
+                  )),
+            )
+          ],
         ),
         GoRoute(
           name: 'profile',

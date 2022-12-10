@@ -56,8 +56,8 @@ List<AppointmentStatusInfo> appointmentStatusInfoList = [
   AppointmentStatusInfo(
     statusCode: 'accepted',
     bahasa: 'Diterima',
-    backgroundColor: const Color(0xFFC8E6C9),
-    foregroundColor: const Color(0xFF43A047),
+    backgroundColor: const Color(0xFFE8F5E9),
+    foregroundColor: const Color(0xFFCF9B00),
   ),
   AppointmentStatusInfo(
     statusCode: 'rejected',
@@ -74,14 +74,14 @@ List<AppointmentStatusInfo> appointmentStatusInfoList = [
   AppointmentStatusInfo(
     statusCode: 'ongoing',
     bahasa: 'Sedang Berlangsung',
-    backgroundColor: const Color(0xFFC8E6C9),
-    foregroundColor: const Color(0xFFFFC107),
+    backgroundColor: const Color(0xFFE8F5E9),
+    foregroundColor: const Color(0xFFCF9B00),
   ),
   AppointmentStatusInfo(
     statusCode: 'completed',
     bahasa: 'Selesai',
     backgroundColor: const Color(0xFFC8E6C9),
-    foregroundColor: const Color(0xFFFFC107),
+    foregroundColor: const Color(0xFF43A047),
   ),
   AppointmentStatusInfo(
     statusCode: 'canceledByUser',
