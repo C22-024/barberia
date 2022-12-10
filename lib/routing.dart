@@ -125,22 +125,9 @@ final router = GoRouter(
       name: 'add-review',
       path: '/add-review',
       pageBuilder: (context, state) {
-        // return MaterialPage(
-        //   child: AddReviewPage(
-        //     appointment: state.extra as Appointment,
-        //   ),
-        //   fullscreenDialog: true,
-        // );
-        return const MaterialPage(
+        return MaterialPage(
           child: AddReviewPage(
-            appointment: Appointment(
-              id: 'b6Is8jvH2hAI26ZrWQj7',
-              barbershopId: 'barbershop_eu4SX8BFpONUt5TsHr8U',
-              barbershopName: 'Cepmek BB',
-              user:
-                  User(id: 'user_vMnxi6RSdXUMkzUkiaRlRgQIe2K2', name: 'Zafran'),
-              timestamp: 1670431166271,
-            ),
+            appointment: state.extra as Appointment,
           ),
           fullscreenDialog: true,
         );
