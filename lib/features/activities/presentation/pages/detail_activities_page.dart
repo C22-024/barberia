@@ -1,11 +1,8 @@
 import 'package:barberia/features/activities/domain/entities/appointment.dart';
-import 'package:barberia/features/activities/presentation/widgets/activity_item_card_widget.dart';
 import 'package:barberia/features/activities/presentation/widgets/status_appointment_widget.dart';
 import 'package:barberia_ui/barberia_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
-import 'package:timeago/timeago.dart' as timeago;
 
 class DetailActivitiesPage extends StatelessWidget {
   final Appointment appointment;
@@ -14,9 +11,6 @@ class DetailActivitiesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final date =
-        DateTime.fromMillisecondsSinceEpoch(appointment.status['updatedAt']);
-
     return Scaffold(
       appBar: BAppBar(
         title: BText.titleMedium('Detail Aktivitas'),
@@ -59,6 +53,23 @@ class DetailActivitiesPage extends StatelessWidget {
                               ),
                             ],
                           ),
+                          Center(
+                            child: BCard(
+                              margin: EdgeInsets.all(5),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8.0, vertical: 5),
+                                child: Column(
+                                  children: [
+                                    BText.caption('Review anda :'),
+                                    BText.caption(
+                                      appointment.review!['content'],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                           BText.titleSmall(
                             appointment.barbershop['name'],
                           ),
@@ -90,19 +101,42 @@ class DetailActivitiesPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(bottom: 10),
+                            padding: const EdgeInsets.only(bottom: 10),
                             child: BText.titleSmall('Pelayanan'),
                           ),
-                          BText.body(
-                            appointment.services![0]['name'],
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              BText.body(
+                                'Jenis Layanan',
+                              ),
+                              BText.body(
+                                appointment.services![0]['name'],
+                              ),
+                            ],
                           ),
-                          BText.body(
-                            '${appointment.services![0]['durationInMinutes']} menit',
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              BText.body(
+                                'Durasi Layanan',
+                              ),
+                              BText.body(
+                                '${appointment.services![0]['durationInMinutes']} menit',
+                              ),
+                            ],
                           ),
-                          BText.body(
-                            'Rp. ${appointment.services![0]['price']}',
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              BText.body(
+                                'Harga Layanan',
+                              ),
+                              BText.body(
+                                'Rp. ${appointment.services![0]['price']}',
+                              ),
+                            ],
                           ),
-                          BText.caption(timeago.format(date, locale: 'id')),
                         ],
                       ),
                     ),
@@ -128,14 +162,14 @@ class DetailActivitiesPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(bottom: 10),
+                            padding: const EdgeInsets.only(bottom: 10),
                             child: BText.titleSmall('Detail Pembayaran'),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               BText.body(
-                                'Harga',
+                                'Harga Layanan',
                               ),
                               BText.body(
                                 'Rp. ${appointment.services![0]['price']}',
@@ -146,10 +180,10 @@ class DetailActivitiesPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               BText.body(
-                                'Biaya aplikasi (5%)',
+                                'Biaya admin',
                               ),
                               BText.body(
-                                'Rp. ${appointment.services![0]['price'] * 5 / 100}',
+                                'Rp. 1000',
                               ),
                             ],
                           ),
@@ -162,7 +196,7 @@ class DetailActivitiesPage extends StatelessWidget {
                                   'Total Pembayaran',
                                 ),
                                 BText.body(
-                                  'Rp. ${(appointment.services![0]['price'] * 5 / 100) + appointment.services![0]['price']}',
+                                  'Rp. ${(1000) + appointment.services![0]['price']}',
                                 ),
                               ],
                             ),
