@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:barberia/features/booking/presentation/pages/booking_page.dart';
+import 'package:barberia/features/booking/presentation/pages/success_page.dart';
 import 'package:barberia/features/activities/domain/entities/appointment.dart';
 import 'package:barberia/features/activities/presentation/pages/activities_page.dart';
 import 'package:barberia/features/activities/presentation/pages/detail_activities_page.dart';
@@ -142,7 +144,21 @@ final router = GoRouter(
       parentNavigatorKey: _rootNavigatorKey,
       name: 'barbershops',
       path: '/barbershops/:id',
-      builder: (context, state) => BarbershopPage(barbershopId: '${state.params['id']}'),
+      builder: (context, state) =>
+          BarbershopPage(barbershopId: '${state.params['id']}'),
+    ),
+    GoRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      name: 'booking',
+      path: '/booking/:barbershopId',
+      builder: (context, state) =>
+          BookingPage(barbershopId: '${state.params['barbershopId']}'),
+    ),
+    GoRoute(
+      parentNavigatorKey: _rootNavigatorKey,
+      name: 'success',
+      path: '/success',
+      builder: (context, state) => const SuccessPage(),
     ),
   ],
   redirect: (_, state) async {
@@ -161,7 +177,9 @@ final router = GoRouter(
             }
 
             // in a setup pages
-            if (state.subloc == '/' || state.subloc.startsWith('/welcome') || state.subloc == '/profile-setup') {
+            if (state.subloc == '/' ||
+                state.subloc.startsWith('/welcome') ||
+                state.subloc == '/profile-setup') {
               return redirectPath;
             }
 

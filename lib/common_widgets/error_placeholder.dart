@@ -21,7 +21,7 @@ class ErrorPlaceholder extends StatelessWidget {
           BText(
             'Duh, ada kesalahan saat memuat data.',
             style: bodyStyle.copyWith(color: BColors.negative),
-          )
+          ),
         ],
       ),
     );
