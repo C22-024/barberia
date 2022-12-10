@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:barberia/features/activities/domain/entities/appointment.dart';
 import 'package:barberia/features/activities/presentation/pages/activities_page.dart';
 import 'package:barberia/features/activities/presentation/pages/detail_activities_page.dart';
+import 'package:barberia/features/review%20list/presentation/page/review_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -84,6 +85,11 @@ final router = GoRouter(
               builder: ((context, state) => DetailActivitiesPage(
                     appointment: state.extra as Appointment,
                   )),
+            ),
+            GoRoute(
+              name: 'list-review',
+              path: 'list-review',
+              builder: (context, state) => ReviewListPage(),
             )
           ],
         ),
@@ -142,7 +148,8 @@ final router = GoRouter(
       parentNavigatorKey: _rootNavigatorKey,
       name: 'barbershops',
       path: '/barbershops/:id',
-      builder: (context, state) => BarbershopPage(barbershopId: '${state.params['id']}'),
+      builder: (context, state) =>
+          BarbershopPage(barbershopId: '${state.params['id']}'),
     ),
   ],
   redirect: (_, state) async {
@@ -161,7 +168,9 @@ final router = GoRouter(
             }
 
             // in a setup pages
-            if (state.subloc == '/' || state.subloc.startsWith('/welcome') || state.subloc == '/profile-setup') {
+            if (state.subloc == '/' ||
+                state.subloc.startsWith('/welcome') ||
+                state.subloc == '/profile-setup') {
               return redirectPath;
             }
 

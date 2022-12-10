@@ -3,6 +3,7 @@ import 'package:barberia/features/activities/presentation/widgets/status_appoint
 import 'package:barberia_ui/barberia_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 
 class DetailActivitiesPage extends StatelessWidget {
   final Appointment appointment;
@@ -55,7 +56,7 @@ class DetailActivitiesPage extends StatelessWidget {
                           ),
                           Center(
                             child: BCard(
-                              margin: EdgeInsets.all(5),
+                              margin: const EdgeInsets.all(5),
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 8.0, vertical: 5),
@@ -213,7 +214,9 @@ class DetailActivitiesPage extends StatelessWidget {
               child: BButton(
                 variant: BButtonVariant.positive,
                 label: 'Tambah Review',
-                onPressed: () {},
+                onPressed: () {
+                  context.goNamed('list-review');
+                },
               ),
             )
           ],

@@ -110,3 +110,15 @@ class AppointmentStatusInfo {
   final Color backgroundColor;
   final Color foregroundColor;
 }
+
+class AppointmentReview {
+  AppointmentReview({
+    required this.name,
+    required this.rate,
+    required this.content,
+  });
+
+  final String name;
+  final double rate;
+  final String content;
+}

@@ -33,7 +33,7 @@ class ActivityItemCard extends StatelessWidget {
             children: [
               Container(
                 margin: const EdgeInsets.only(right: 10),
-                child: Icon(
+                child: const Icon(
                   Icons.cut_rounded,
                   size: 60,
                 ),
