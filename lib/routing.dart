@@ -4,12 +4,13 @@ import 'package:barberia/features/booking/presentation/pages/booking_page.dart';
 import 'package:barberia/features/booking/presentation/pages/success_page.dart';
 import 'package:barberia/features/activities/domain/entities/appointment.dart';
 import 'package:barberia/features/activities/presentation/pages/activities_page.dart';
-import 'package:barberia/features/activities/presentation/pages/detail_activities_page.dart';
+import 'package:barberia/features/activities/presentation/pages/detail_progress_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'common_widgets/placeholder_page.dart';
 import 'common_widgets/scaffold_with_navbar.dart';
+import 'features/activities/presentation/pages/detail_history_page.dart';
 import 'features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'features/auth/presentation/pages/password_reset_page.dart';
 import 'features/auth/presentation/pages/profile_setup_page.dart';
@@ -81,9 +82,16 @@ final router = GoRouter(
           builder: (context, state) => const ActivitiesPage(),
           routes: [
             GoRoute(
-              name: 'detail-activity',
-              path: 'detail-activity',
-              builder: ((context, state) => DetailActivitiesPage(
+              name: 'detail-process-activity',
+              path: 'detail-process-activity',
+              builder: ((context, state) => DetailProgressPage(
+                    appointment: state.extra as Appointment,
+                  )),
+            ),
+            GoRoute(
+              name: 'detail-history-activity',
+              path: 'detail-history-activity',
+              builder: ((context, state) => DetailHistoryPage(
                     appointment: state.extra as Appointment,
                   )),
             )

@@ -10,9 +10,11 @@ class ActivityItemCard extends StatelessWidget {
   const ActivityItemCard({
     Key? key,
     required this.appointment,
+    required this.activityType,
   }) : super(key: key);
 
   final Appointment appointment;
+  final String activityType;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class ActivityItemCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        context.goNamed('detail-activity', extra: appointment);
+        context.pushNamed('detail-$activityType-activity', extra: appointment);
       },
       child: BCard(
         child: Container(
@@ -33,7 +35,7 @@ class ActivityItemCard extends StatelessWidget {
             children: [
               Container(
                 margin: const EdgeInsets.only(right: 10),
-                child: Icon(
+                child: const Icon(
                   Icons.cut_rounded,
                   size: 60,
                 ),
@@ -54,7 +56,8 @@ class ActivityItemCard extends StatelessWidget {
                     ),
                     StatusAppointment(status: appointment.status['code']),
                     BText.body(
-                        'Rp. ${appointment.services![0]['price'].toString()}')
+                      'Rp. ${appointment.services![0]['price'].toString()}',
+                    )
                   ],
                 ),
               ),

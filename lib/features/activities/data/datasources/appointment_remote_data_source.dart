@@ -16,6 +16,7 @@ class AppointmentRemoteDataSourceImpl implements AppointmentRemoteDataSource {
   Stream<List<AppointmentModel>> getAppointments(String userId) async* {
     yield* _firestore.appointmentColRef
         .where('user.id', isEqualTo: userId)
+        .orderBy('status.updatedAt', descending: true)
         .snapshots()
         .map((event) => event.docs
             .map((e) => AppointmentModel.fromFirestore(
