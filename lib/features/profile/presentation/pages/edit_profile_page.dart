@@ -110,13 +110,28 @@ class _ProfileEditPageBody extends StatelessWidget {
                   ),
             radius: radius,
             child: state.profilePictureOption.isNone()
-                ? BText(
-                    initialName!,
-                    style: baseTextStyle.copyWith(
-                      fontSize: 50,
-                      fontWeight: FontWeight.w700,
-                      color: BColors.onInfo,
+                ? stateGetProfilePicture.maybeWhen(
+                    failure: (failure) => BText(
+                      initialName!,
+                      style: baseTextStyle.copyWith(
+                        fontSize: 50,
+                        fontWeight: FontWeight.w700,
+                        color: BColors.onInfo,
+                      ),
                     ),
+                    success: (profilePictureData) {
+                      if (profilePictureData == null) {
+                        return BText(
+                          initialName!,
+                          style: baseTextStyle.copyWith(
+                            fontWeight: FontWeight.w700,
+                            color: BColors.onInfo,
+                          ),
+                        );
+                      }
+                      return null;
+                    },
+                    orElse: () => const CircularProgressIndicator(),
                   )
                 : null,
           );
