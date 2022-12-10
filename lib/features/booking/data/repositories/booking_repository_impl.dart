@@ -36,4 +36,14 @@ class BookingRepositoryImpl implements BookingRepository {
       return left(Failure.unexpected(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, int>> getBPoinBalance(String userId) async {
+    try {
+      final result = await _bookingRemoteDatasource.getBPoinBalance(userId);
+      return right(result);
+    } catch (e) {
+      return left(Failure.unexpected(e.toString()));
+    }
+  }
 }

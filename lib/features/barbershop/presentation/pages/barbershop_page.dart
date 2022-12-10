@@ -288,8 +288,16 @@ class __FloatingBookButtonState extends State<_FloatingBookButton> {
             if (serviceCount == 0) {
               FlushbarHelper.createInformation(message: 'Belum ada layanan')
                   .show(context);
+              return;
             }
-            // TODO: go to book page
+            final barbershopId = context
+                .read<BarbershopBloc>()
+                .state
+                .barbershopDetailState
+                .whenOrNull(loadSuccess: (barbershop) => barbershop)!
+                .id;
+            context
+                .pushNamed('booking', params: {'barbershopId': barbershopId});
           },
         ),
       ),
@@ -771,11 +779,8 @@ class _ServiceListView extends StatelessWidget {
                 subtitle: BText.body(
                   parseDurationInMinutes(service.durationInMinutes),
                 ),
-                suffix: BText.highlightSmall(NumberFormat.currency(
-                  locale: 'id_ID',
-                  decimalDigits: 0,
-                  symbol: 'Rp',
-                ).format(service.price)),
+                suffix: BText.highlightSmall(
+                    getIt<NumberFormat>().format(service.price)),
               );
             },
             childCount: services.length,
