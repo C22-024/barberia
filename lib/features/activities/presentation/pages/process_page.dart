@@ -50,7 +50,9 @@ class ProcessView extends StatelessWidget {
                 itemCount: appointmentsResult.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ActivityItemCard(
-                      appointment: appointmentsResult[index]);
+                    appointment: appointmentsResult[index],
+                    activityType: 'process',
+                  );
                 },
               );
             }

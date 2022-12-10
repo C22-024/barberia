@@ -47,18 +47,15 @@ class HistoryView extends StatelessWidget {
                 ),
               );
             }
-            return Align(
-              alignment: Alignment.topCenter,
-              child: ListView.builder(
-                padding: const EdgeInsets.all(8),
-                reverse: true,
-                shrinkWrap: true,
-                itemCount: appointmentsResult.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ActivityItemCard(
-                      appointment: appointmentsResult[index]);
-                },
-              ),
+            return ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: appointmentsResult.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ActivityItemCard(
+                  appointment: appointmentsResult[index],
+                  activityType: 'history',
+                );
+              },
             );
           },
           orElse: () => const Center(
