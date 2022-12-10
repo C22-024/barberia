@@ -1,8 +1,10 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:barberia_ui/barberia_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../common_widgets/spacing.dart';
 import '../../../../injection.dart';
@@ -33,9 +35,14 @@ class AddReviewPage extends StatelessWidget {
               (_) => FlushbarHelper.createError(
                       message: 'Yah, ulasanmu gagal terkirim nih.')
                   .show(context),
-              (_) => FlushbarHelper.createSuccess(
-                      message: 'Yeay, ulasanmu terkirim!')
-                  .show(context),
+              (_) {
+                SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+                  FlushbarHelper.createSuccess(
+                          message: 'Yeay, ulasanmu terkirim!')
+                      .show(context);
+                });
+                context.goNamed('activities');
+              },
             ),
           );
         },

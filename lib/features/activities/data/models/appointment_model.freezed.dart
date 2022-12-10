@@ -27,7 +27,7 @@ mixin _$AppointmentModel {
   Map<dynamic, dynamic> get barbershop => throw _privateConstructorUsedError;
   List<Map>? get services => throw _privateConstructorUsedError;
   int? get userDefinedExpiry => throw _privateConstructorUsedError;
-  int? get timeStamp => throw _privateConstructorUsedError;
+  int? get timestamp => throw _privateConstructorUsedError;
   Map<dynamic, dynamic>? get paymentDetails =>
       throw _privateConstructorUsedError;
   Map<dynamic, dynamic>? get review => throw _privateConstructorUsedError;
@@ -51,7 +51,7 @@ abstract class $AppointmentModelCopyWith<$Res> {
       Map<dynamic, dynamic> barbershop,
       List<Map>? services,
       int? userDefinedExpiry,
-      int? timeStamp,
+      int? timestamp,
       Map<dynamic, dynamic>? paymentDetails,
       Map<dynamic, dynamic>? review});
 }
@@ -75,7 +75,7 @@ class _$AppointmentModelCopyWithImpl<$Res, $Val extends AppointmentModel>
     Object? barbershop = null,
     Object? services = freezed,
     Object? userDefinedExpiry = freezed,
-    Object? timeStamp = freezed,
+    Object? timestamp = freezed,
     Object? paymentDetails = freezed,
     Object? review = freezed,
   }) {
@@ -104,9 +104,9 @@ class _$AppointmentModelCopyWithImpl<$Res, $Val extends AppointmentModel>
           ? _value.userDefinedExpiry
           : userDefinedExpiry // ignore: cast_nullable_to_non_nullable
               as int?,
-      timeStamp: freezed == timeStamp
-          ? _value.timeStamp
-          : timeStamp // ignore: cast_nullable_to_non_nullable
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
               as int?,
       paymentDetails: freezed == paymentDetails
           ? _value.paymentDetails
@@ -135,7 +135,7 @@ abstract class _$$_AppointmentModelCopyWith<$Res>
       Map<dynamic, dynamic> barbershop,
       List<Map>? services,
       int? userDefinedExpiry,
-      int? timeStamp,
+      int? timestamp,
       Map<dynamic, dynamic>? paymentDetails,
       Map<dynamic, dynamic>? review});
 }
@@ -157,7 +157,7 @@ class __$$_AppointmentModelCopyWithImpl<$Res>
     Object? barbershop = null,
     Object? services = freezed,
     Object? userDefinedExpiry = freezed,
-    Object? timeStamp = freezed,
+    Object? timestamp = freezed,
     Object? paymentDetails = freezed,
     Object? review = freezed,
   }) {
@@ -186,9 +186,9 @@ class __$$_AppointmentModelCopyWithImpl<$Res>
           ? _value.userDefinedExpiry
           : userDefinedExpiry // ignore: cast_nullable_to_non_nullable
               as int?,
-      timeStamp: freezed == timeStamp
-          ? _value.timeStamp
-          : timeStamp // ignore: cast_nullable_to_non_nullable
+      timestamp: freezed == timestamp
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
               as int?,
       paymentDetails: freezed == paymentDetails
           ? _value._paymentDetails
@@ -212,7 +212,7 @@ class _$_AppointmentModel extends _AppointmentModel {
       required final Map<dynamic, dynamic> barbershop,
       final List<Map>? services,
       this.userDefinedExpiry,
-      this.timeStamp,
+      this.timestamp,
       final Map<dynamic, dynamic>? paymentDetails,
       final Map<dynamic, dynamic>? review})
       : _status = status,
@@ -266,7 +266,7 @@ class _$_AppointmentModel extends _AppointmentModel {
   @override
   final int? userDefinedExpiry;
   @override
-  final int? timeStamp;
+  final int? timestamp;
   final Map<dynamic, dynamic>? _paymentDetails;
   @override
   Map<dynamic, dynamic>? get paymentDetails {
@@ -289,7 +289,7 @@ class _$_AppointmentModel extends _AppointmentModel {
 
   @override
   String toString() {
-    return 'AppointmentModel(id: $id, status: $status, user: $user, barbershop: $barbershop, services: $services, userDefinedExpiry: $userDefinedExpiry, timeStamp: $timeStamp, paymentDetails: $paymentDetails, review: $review)';
+    return 'AppointmentModel(id: $id, status: $status, user: $user, barbershop: $barbershop, services: $services, userDefinedExpiry: $userDefinedExpiry, timestamp: $timestamp, paymentDetails: $paymentDetails, review: $review)';
   }
 
   @override
@@ -305,8 +305,8 @@ class _$_AppointmentModel extends _AppointmentModel {
             const DeepCollectionEquality().equals(other._services, _services) &&
             (identical(other.userDefinedExpiry, userDefinedExpiry) ||
                 other.userDefinedExpiry == userDefinedExpiry) &&
-            (identical(other.timeStamp, timeStamp) ||
-                other.timeStamp == timeStamp) &&
+            (identical(other.timestamp, timestamp) ||
+                other.timestamp == timestamp) &&
             const DeepCollectionEquality()
                 .equals(other._paymentDetails, _paymentDetails) &&
             const DeepCollectionEquality().equals(other._review, _review));
@@ -322,7 +322,7 @@ class _$_AppointmentModel extends _AppointmentModel {
       const DeepCollectionEquality().hash(_barbershop),
       const DeepCollectionEquality().hash(_services),
       userDefinedExpiry,
-      timeStamp,
+      timestamp,
       const DeepCollectionEquality().hash(_paymentDetails),
       const DeepCollectionEquality().hash(_review));
 
@@ -348,7 +348,7 @@ abstract class _AppointmentModel extends AppointmentModel {
       required final Map<dynamic, dynamic> barbershop,
       final List<Map>? services,
       final int? userDefinedExpiry,
-      final int? timeStamp,
+      final int? timestamp,
       final Map<dynamic, dynamic>? paymentDetails,
       final Map<dynamic, dynamic>? review}) = _$_AppointmentModel;
   const _AppointmentModel._() : super._();
@@ -370,7 +370,7 @@ abstract class _AppointmentModel extends AppointmentModel {
   @override
   int? get userDefinedExpiry;
   @override
-  int? get timeStamp;
+  int? get timestamp;
   @override
   Map<dynamic, dynamic>? get paymentDetails;
   @override

@@ -80,7 +80,7 @@ class BookingRemoteDatasourceImpl implements BookingRemoteDatasource {
       'Content-Type': 'application/json',
       'Authorization': 'Basic ${Env.AUTH_STRING}',
     };
-    final grossAmount = calculateGrossAmount(appointment);
+    var grossAmount = calculateGrossAmount(appointment);
     final itemDetails = appointment.paymentDetails.details
         .map((e) => {
               'id': e.id,
@@ -89,6 +89,20 @@ class BookingRemoteDatasourceImpl implements BookingRemoteDatasource {
               'quantity': 1,
             })
         .toList();
+
+    if (appointment.paymentDetails.channels.isNotEmpty) {
+      final payWithBPoinAmount = appointment.paymentDetails.channels
+          .firstWhere((element) => element.name == 'BPoin')
+          .amount;
+      grossAmount -= payWithBPoinAmount;
+      itemDetails.add({
+        'id': 'BPoin',
+        'name': 'Pay with BPoin',
+        'price': -payWithBPoinAmount,
+        'quantity': 1,
+      });
+    }
+
     final body = {
       'transaction_details': {
         'order_id': appointment.id,

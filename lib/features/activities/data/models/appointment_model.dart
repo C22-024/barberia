@@ -15,7 +15,7 @@ class AppointmentModel with _$AppointmentModel {
     required Map barbershop,
     List<Map>? services,
     int? userDefinedExpiry,
-    int? timeStamp,
+    int? timestamp,
     Map? paymentDetails,
     Map? review,
   }) = _AppointmentModel;
@@ -29,7 +29,7 @@ class AppointmentModel with _$AppointmentModel {
       barbershop: appointment.barbershop,
       services: appointment.services,
       userDefinedExpiry: appointment.userDefinedExpiry,
-      timeStamp: appointment.timeStamp,
+      timestamp: appointment.timeStamp,
       paymentDetails: appointment.paymentDetails,
       review: appointment.review,
     );
@@ -50,7 +50,7 @@ class AppointmentModel with _$AppointmentModel {
       barbershop: barbershop,
       services: services,
       userDefinedExpiry: userDefinedExpiry,
-      timeStamp: timeStamp,
+      timeStamp: timestamp,
       paymentDetails: paymentDetails,
       review: review,
     );
