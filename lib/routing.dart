@@ -1,19 +1,14 @@
 import 'dart:async';
 
-import 'package:barberia/common_widgets/placeholder_page.dart';
-import 'package:barberia/features/review/domain/entities/appointment.dart';
-import 'package:barberia/features/booking/presentation/pages/booking_page.dart';
-import 'package:barberia/features/booking/presentation/pages/success_page.dart';
-import 'package:barberia/features/activities/domain/entities/appointment.dart';
-import 'package:barberia/features/activities/presentation/pages/activities_page.dart';
-import 'package:barberia/features/activities/presentation/pages/detail_progress_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'features/review/domain/entities/user.dart';
-import 'features/review/presentation/pages/add_review_page.dart';
+import 'common_widgets/placeholder_page.dart';
 import 'common_widgets/scaffold_with_navbar.dart';
+import 'features/activities/domain/entities/appointment.dart' as activities;
+import 'features/activities/presentation/pages/activities_page.dart';
 import 'features/activities/presentation/pages/detail_history_page.dart';
+import 'features/activities/presentation/pages/detail_progress_page.dart';
 import 'features/auth/presentation/bloc/auth_bloc/auth_bloc.dart';
 import 'features/auth/presentation/pages/password_reset_page.dart';
 import 'features/auth/presentation/pages/profile_setup_page.dart';
@@ -21,13 +16,17 @@ import 'features/auth/presentation/pages/signin_page.dart';
 import 'features/auth/presentation/pages/signup_page.dart';
 import 'features/auth/presentation/pages/splash_page.dart';
 import 'features/auth/presentation/pages/welcome_page.dart';
-import 'features/profile/presentation/pages/edit_profile_page.dart';
-import 'features/profile/presentation/pages/profile_page.dart';
 import 'features/barbershop/presentation/pages/barbershop_page.dart';
+import 'features/booking/presentation/pages/booking_page.dart';
+import 'features/booking/presentation/pages/success_page.dart';
 import 'features/home/presentation/bloc/home_page_bloc/home_page_bloc.dart';
 import 'features/home/presentation/pages/home_page.dart';
 import 'features/home/presentation/pages/location_settings_page.dart';
 import 'features/home/presentation/pages/nearest_barbershops_overview_page.dart';
+import 'features/profile/presentation/pages/edit_profile_page.dart';
+import 'features/profile/presentation/pages/profile_page.dart';
+import 'features/review/domain/entities/appointment.dart' as review;
+import 'features/review/presentation/pages/add_review_page.dart';
 import 'injection.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'rootNav');
@@ -88,14 +87,14 @@ final router = GoRouter(
               name: 'detail-process-activity',
               path: 'detail-process-activity',
               builder: ((context, state) => DetailProgressPage(
-                    appointment: state.extra as Appointment,
+                    appointment: state.extra as activities.Appointment,
                   )),
             ),
             GoRoute(
               name: 'detail-history-activity',
               path: 'detail-history-activity',
               builder: ((context, state) => DetailHistoryPage(
-                    appointment: state.extra as Appointment,
+                    appointment: state.extra as activities.Appointment,
                   )),
             )
           ],
@@ -127,7 +126,7 @@ final router = GoRouter(
       pageBuilder: (context, state) {
         return MaterialPage(
           child: AddReviewPage(
-            appointment: state.extra as Appointment,
+            appointment: state.extra as review.Appointment,
           ),
           fullscreenDialog: true,
         );
