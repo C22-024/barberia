@@ -45,7 +45,6 @@ dependencies:
   share_plus: ^6.3.0
   flutter_rating_bar: ^4.0.1
   http: ^0.13.5
-  url_launcher: ^6.1.7
 
 dev_dependencies:
   flutter_test:
