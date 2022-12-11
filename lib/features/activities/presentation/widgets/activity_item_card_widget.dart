@@ -48,10 +48,21 @@ class ActivityItemCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        BText.titleSmall(
-                          appointment.barbershop['name'],
+                        Expanded(
+                          child: BText.titleSmall(
+                            appointment.barbershop['name'],
+                          ),
                         ),
-                        BText.caption(timeago.format(date, locale: 'id')),
+                        Expanded(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              timeago.format(date, locale: 'id'),
+                              textAlign: TextAlign.right,
+                              style: const TextStyle(fontSize: 12),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                     StatusAppointment(status: appointment.status['code']),

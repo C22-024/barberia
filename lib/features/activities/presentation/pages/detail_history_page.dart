@@ -191,7 +191,7 @@ class DetailHistoryPage extends StatelessWidget {
                                 'Biaya admin',
                               ),
                               BText.body(
-                                'Rp. 1000',
+                                'Rp. 2000',
                               ),
                             ],
                           ),
@@ -204,7 +204,7 @@ class DetailHistoryPage extends StatelessWidget {
                                   'Total Pembayaran',
                                 ),
                                 BText.body(
-                                  'Rp. ${(1000) + appointment.services![0]['price']}',
+                                  'Rp. ${(2000) + appointment.services![0]['price']}',
                                 ),
                               ],
                             ),
